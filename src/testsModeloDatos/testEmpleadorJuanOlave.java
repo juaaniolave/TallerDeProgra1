@@ -13,7 +13,7 @@ import modeloDatos.Cliente;
 import modeloDatos.Empleador;
 import util.Constantes;
 
-public class testEmpleador {
+public class testEmpleadorJuanOlave {
 	
 	Empleador empleador;
 	String username;

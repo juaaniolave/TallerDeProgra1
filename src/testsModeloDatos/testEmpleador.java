@@ -14,7 +14,7 @@ import modeloDatos.Empleador;
 import util.Constantes;
 
 public class testEmpleador {
-	Bruno gil;
+	
 	Empleador empleador;
 	String username;
 	String password;

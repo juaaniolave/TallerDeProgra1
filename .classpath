@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/juaan/OneDrive/Documents/GitHub/TallerDeProgra1/linkeFI.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/bruno/OneDrive/Documentos/GitHub/TallerDeProgra1/linkeFI.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

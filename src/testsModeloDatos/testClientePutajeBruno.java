@@ -44,7 +44,7 @@ class testClientePutajeBruno {
 	@Test
 	void testSetCliente() {
 		cliente=new EmpleadoPretenso();
-		c.setCliente(cliente);
+		this.c.setCliente(cliente);
 		Assert.assertEquals("no cambio el cliente",cliente,c.getCliente());
 	}
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import modeloDatos.Ticket;
+import modeloNegocio.Agencia;
 import util.Constantes;
 
 class testTicketBruno {
@@ -37,21 +38,21 @@ class testTicketBruno {
 
 	@BeforeEach
 	void setUp() throws Exception {
+		Agencia.getInstance().setLimitesRemuneracion(1000, 5000);
 		this.locacion1=Constantes.PRESENCIAL;
-		this.remuneracion1=1000;
+		this.remuneracion1=1500;
 		this.jornada1=Constantes.JORNADA_COMPLETA;
 		this.puesto1=Constantes.JUNIOR;
 		this.experiencia1=Constantes.EXP_MEDIA;
 		this.estudios1=Constantes.TERCIARIOS;
 		t1=new Ticket(this.locacion1,this.remuneracion1,this.jornada1,this.puesto1,this.experiencia1,this.estudios1);
 		this.locacion2=Constantes.HOME_OFFICE;
-		this.remuneracion2=4500;
+		this.remuneracion2=2500;
 		this.jornada2=Constantes.JORNADA_EXTENDIDA;
 		this.puesto2=Constantes.SENIOR;
 		this.experiencia2=Constantes.EXP_MUCHA;
 		this.estudios2=Constantes.SECUNDARIOS;
 		t2=new Ticket(this.locacion2,this.remuneracion2,this.jornada2,this.puesto2,this.experiencia2,this.estudios2);
-		
 	}
 
 	@AfterEach
@@ -80,7 +81,7 @@ class testTicketBruno {
 	}
 	@Test
 	void testGetComparacionRemuneracion() {
-		Assert.assertEquals(-1.0,t1.getComparacionRemuneracion(t2),0.0);
+		Assert.assertEquals(1.0,t1.getComparacionRemuneracion(t2),0.0);
 	}
 	@Test
 	void tesSetRemuneracion() {

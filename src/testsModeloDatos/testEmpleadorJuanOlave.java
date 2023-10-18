@@ -1,7 +1,5 @@
 package testsModeloDatos;
 
-import static org.junit.Assert.fail;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -9,8 +7,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import junit.framework.Assert;
-import modeloDatos.Cliente;
 import modeloDatos.Empleador;
+import modeloDatos.Ticket;
 import util.Constantes;
 
 public class testEmpleadorJuanOlave {
@@ -93,4 +91,14 @@ public class testEmpleadorJuanOlave {
 		this.empleador.setTelefono(this.telefono);
 		Assert.assertEquals("set y get no son igual",this.telefono,this.empleador.getTelefono());
 	}
+	
+	@Test
+	public void testCalculaComision() {		
+		//Para salud 60%, comercio local, 70%, comercion internacional 80%
+		Ticket ticket = new Ticket(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS);
+		double comisionEsperada = 1500*0.6;
+		Assert.assertEquals("Las comisiones no son iguales", comisionEsperada, this.empleador.calculaComision(ticket), 0.0);
+	}
+	
+	
 }

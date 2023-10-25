@@ -1,5 +1,6 @@
 package testsModeloDatos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -7,14 +8,15 @@ import org.junit.jupiter.api.Test;
 
 import junit.framework.Assert;
 import modeloDatos.Cliente;
+import modeloDatos.ClientePuntaje;
 import modeloDatos.EmpleadoPretenso;
 import modeloDatos.Empleador;
 import modeloNegocio.Agencia;
 import util.Constantes;
 
 class testAplicaPromoJuanOlave {
-	EmpleadoPretenso ep1,ep2,ep3;
-	Empleador emp1,emp2,emp3;
+	EmpleadoPretenso ep1,ep2;
+	Empleador emp1,emp2;
 	HashMap<String,EmpleadoPretenso> empleados=new HashMap<>();
 	HashMap<String,Empleador> empleadores=new HashMap<>();
 	Cliente cliente;
@@ -22,6 +24,9 @@ class testAplicaPromoJuanOlave {
 	boolean promoPorListaDePostulantes;
 	String nombre,password,user,tel,apellido;
 	String rubro,tipoPersona;
+	ArrayList <ClientePuntaje> listaPostulantes = new ArrayList<>();
+	ArrayList <ClientePuntaje> listaPostulantes2 = new ArrayList<>();
+	ClientePuntaje clientePuntaje;
 	int edad;
 	@BeforeEach
 	 void setUp() throws Exception {
@@ -40,13 +45,6 @@ class testAplicaPromoJuanOlave {
 		this.apellido="Borges";
 		this.edad=25;
 		this.ep2=new EmpleadoPretenso(user,password,nombre,tel,apellido,edad);
-		this.user="Ramirito";
-		this.password="1010";
-		this.nombre="Ramiro";
-		this.tel="4412";
-		this.apellido="Mattioli";
-		this.edad=30;
-		this.ep3=new EmpleadoPretenso(user,password,nombre,tel,apellido,edad);
 		this.user="Gero";
 		this.password="3333";
 		this.nombre="Geronimo";
@@ -61,30 +59,20 @@ class testAplicaPromoJuanOlave {
 		this.rubro=Constantes.COMERCIO_INTERNACIONAL;
 		this.tipoPersona=Constantes.JURIDICA;
 		this.emp2=new Empleador(user,password,nombre,tel,rubro,tipoPersona);
-		this.user="Mati";
-		this.password="2091";
-		this.nombre="Matias";
-		this.tel="9732";
-		this.rubro=Constantes.SALUD;
-		this.tipoPersona=Constantes.FISICA;
-		this.emp3=new Empleador(user,password,nombre,tel,rubro,tipoPersona);
-		ep1.setCandidato(emp1);
-		ep1.setCandidato(emp2);
-		ep1.setCandidato(emp3);
-		emp1.setCandidato(ep1);
-		emp2.setCandidato(ep1);
-		ep2.setCandidato(emp1);
-		ep2.setCandidato(emp3);
-		emp1.setCandidato(ep2);
-		emp3.setCandidato(ep2);
-		emp3.setCandidato(ep1);
+		clientePuntaje= new ClientePuntaje(100.0,emp1);
+		this.listaPostulantes.add(clientePuntaje);
+		clientePuntaje= new ClientePuntaje(200.0,emp2);
+		this.listaPostulantes.add(clientePuntaje);
+		this.ep1.setListaDePostulantes(listaPostulantes);
+		
+		clientePuntaje= new ClientePuntaje(150.0,ep1);
+		this.listaPostulantes2.add(clientePuntaje);
+		this.emp2.setListaDePostulantes(listaPostulantes2);
 		this.empleadores.put(emp1.getPassword(), emp1);
 		this.empleadores.put(emp2.getPassword(), emp2);
-		this.empleadores.put(emp3.getPassword(), emp3);
 		agencia.setEmpleadores(empleadores);
 		this.empleados.put(ep1.getPassword(), ep1);
 		this.empleados.put(ep2.getPassword(), ep2);
-		this.empleados.put(ep3.getPassword(), ep3);
 		agencia.setEmpleados(empleados);
 		
 		//crear lista empleados y empleadores y postulantes
@@ -96,6 +84,6 @@ class testAplicaPromoJuanOlave {
 	@Test
 	public void testAplicaPromo() {
 		cliente= agencia.aplicaPromo(promoPorListaDePostulantes);
-		Assert.assertEquals("El cliente no es el esperado",cliente.equals(ep1),true);
+		Assert.assertTrue("El cliente no es el esperado",cliente.equals(ep1));
 	} 
 }

@@ -45,6 +45,15 @@ class testRegistraUnClienteJuanBAlan {
 	
 	@AfterEach
 	void tearDown() throws Exception {
+		
+		
+		HashMap<String, Empleador> empleadores = a1.getInstance().getEmpleadores();
+	    empleadores.clear();
+		a1.getInstance().setEmpleadores(empleadores);
+		
+		HashMap<String, EmpleadoPretenso> empleados = a1.getInstance().getEmpleados();
+	    empleados.clear();
+	    a1.getInstance().setEmpleados(empleados);
 	}
 
 	@Test

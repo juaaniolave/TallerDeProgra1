@@ -1,5 +1,7 @@
 package TestAgencia;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.util.HashMap;
 
 import org.junit.jupiter.api.AfterEach;
@@ -9,20 +11,18 @@ import org.junit.jupiter.api.Test;
 import excepciones.ContraException;
 import excepciones.NombreUsuarioException;
 import junit.framework.Assert;
-import modeloDatos.Admin;
 import modeloDatos.EmpleadoPretenso;
 import modeloDatos.Empleador;
 import modeloDatos.Usuario;
 import modeloNegocio.Agencia;
 import util.Constantes;
 
-class testLoginExitoso {
+class testCerrarSesionExitoso {
 	String nombre,password,user,tel,apellido;
 	int edad;
 	Agencia a1;
 	private String rubro;
 	private String tipoPersona;
-
 	@BeforeEach
 	void setUp() throws Exception {
 		this.user ="Pedrito";
@@ -40,7 +40,6 @@ class testLoginExitoso {
 		this.rubro=Constantes.COMERCIO_LOCAL;
 		this.tipoPersona=Constantes.FISICA;
 		a1.getInstance().registroEmpleador(user, password, nombre, tel, tipoPersona, rubro);
-		
 	}
 
 	@AfterEach
@@ -55,24 +54,21 @@ class testLoginExitoso {
 	}
 
 	@Test
-	void testLoginEmpleado() throws ContraException, NombreUsuarioException {
+	void testCierraSesionEmpleado() throws ContraException, NombreUsuarioException {
 		String user="Pedrito";
 		String password="1234";
 		Usuario usuario=a1.getInstance().login(user, password);
-		Assert.assertEquals("El tipo de usuario logeado no es el esperado",0,a1.getInstance().getTipoUsuario());
+		a1.getInstance().cerrarSesion();
+		Assert.assertEquals("El tipo deberia ser -1 ya que se cerro sesion",-1,a1.getInstance().getTipoUsuario());
 	}
+	
 	@Test
-	void testLoginEmpleador() throws ContraException, NombreUsuarioException {
+	void testCierraSesionEmpleador() throws ContraException, NombreUsuarioException {
 		String user="Gero";
 		String password="3333";
 		Usuario usuario=a1.getInstance().login(user, password);
-		Assert.assertEquals("El tipo de usuario logeado no es el esperado",1,a1.getInstance().getTipoUsuario());
+		a1.getInstance().cerrarSesion();
+		Assert.assertEquals("El tipo deberia ser -1 ya que se cerro sesion",-1,a1.getInstance().getTipoUsuario());
 	}
-	@Test
-	void testLoginAdmin() throws ContraException, NombreUsuarioException {
-		String user="";
-		String password="";
-		Usuario usuario=a1.getInstance().login(user, password);
-		Assert.assertEquals("El tipo de usuario logeado no es el esperado",2,a1.getInstance().getTipoUsuario());
-	}
+
 }

@@ -15,6 +15,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import excepciones.ContraException;
+import excepciones.ImposibleCrearEmpleadoException;
+import excepciones.ImposibleCrearEmpleadorException;
 import excepciones.ImposibleModificarTicketsException;
 import excepciones.LimiteInferiorRemuneracionInvalidaException;
 import excepciones.LimiteSuperiorRemuneracionInvalidaException;
@@ -111,14 +113,14 @@ class testAgenciaAlgunosMetodos {
 		//ya que las contratafciones no se puede igualar, las desgloso para ver si son la misma
 		//GregorianCalendar calendar = new GregorianCalendar();
 		//Assert.assertEquals("deberian ser los mismos datos de contratacion (FECHA)",calendar,c2.getFecha());
-		//NO TESTEO LA FECHA PORQUE SON IGUALES Y NO DA DE TODAS FORMAS
+		//NO TESTEO LA FECHA PORQUE SON IGUALES Y NO DA QUE LO SEAN
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADO)",c.getEmpleado(),c2.getEmpleado());
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADOR)",c.getEmpleador(),c2.getEmpleador());
 		
 		
 	}
 	@Test
-	public void testSetLimitesRemuneracionesc1() {
+	public void testSetLimitesRemuneracion() {
 		//en este escenario no se chequean las exepciones solo que cargue bien el numero
 		try {
 			agencia.setLimitesRemuneracion(500, 1500);
@@ -128,6 +130,28 @@ class testAgenciaAlgunosMetodos {
 			Assert.fail(e.getMessage());
 		} catch (LimiteInferiorRemuneracionInvalidaException e) {
 			Assert.fail(e.getMessage());
+		}
+	}
+	@Test
+	public void testSetLimitesRemuneracion2() {
+		//en este escenario no se chequean las exepciones solo que cargue bien el numero
+		try {
+			agencia.setLimitesRemuneracion(1000, 500);
+			Assert.fail("debe haber tirado una excepcion");
+		} catch (LimiteSuperiorRemuneracionInvalidaException e) {
+		} catch (LimiteInferiorRemuneracionInvalidaException e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+	@Test
+	public void testSetLimitesRemuneracion3() {
+		//en este escenario no se chequean las exepciones solo que cargue bien el numero
+		try {
+			agencia.setLimitesRemuneracion(-1000, 500);
+			Assert.fail("debe haber tirado una excepcion");
+		} catch (LimiteSuperiorRemuneracionInvalidaException e) {
+			Assert.fail(e.getMessage());
+		} catch (LimiteInferiorRemuneracionInvalidaException e) {
 		}
 	}
 	@Test
@@ -144,10 +168,10 @@ class testAgenciaAlgunosMetodos {
 		ClientePuntaje c3=new ClientePuntaje(6.0,empleador);
 		ClientePuntaje c4=new ClientePuntaje(1.0,empleador2);
 		//probamos la lista de 1 solo empleado porque es suficiente para el ejemplo
-		Assert.assertEquals("el puntaje debe ser el mismo 1",empleadoPretenso.getListaDePostulantes().get(0).getPuntaje(),c3.getPuntaje(),0.0);
-		Assert.assertEquals("el cliente debe ser el mismo 1",empleadoPretenso.getListaDePostulantes().get(0).getCliente(),c3.getCliente());
-		Assert.assertEquals("el puntaje debe ser el mismo 2",empleadoPretenso.getListaDePostulantes().get(1).getPuntaje(),c4.getPuntaje(),0.0);
-		Assert.assertEquals("el cliente debe ser el mismo 2",empleadoPretenso.getListaDePostulantes().get(1).getCliente(),c4.getCliente());
+		Assert.assertEquals("el puntaje debe ser el mismo 3",empleadoPretenso.getListaDePostulantes().get(0).getPuntaje(),c3.getPuntaje(),0.0);
+		Assert.assertEquals("el cliente debe ser el mismo 3",empleadoPretenso.getListaDePostulantes().get(0).getCliente(),c3.getCliente());
+		Assert.assertEquals("el puntaje debe ser el mismo 4",empleadoPretenso.getListaDePostulantes().get(1).getPuntaje(),c4.getPuntaje(),0.0);
+		Assert.assertEquals("el cliente debe ser el mismo 4",empleadoPretenso.getListaDePostulantes().get(1).getCliente(),c4.getCliente());
 		
 	}
 	@Test
@@ -159,9 +183,116 @@ class testAgenciaAlgunosMetodos {
 				agencia.eliminarTicket();
 				Assert.assertEquals("el ticket deberia ser eliminado",null,empleador.getTicket());
 			} catch (ImposibleModificarTicketsException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Assert.fail(e.getMessage());
 			}
 	}
+	@Test
+	public void testRegistroEmpleador() {
+		//analizamos el caso de que ya exista un usuario
+		try {
+			agencia.registroEmpleador("user1", "pass1", "nombR1", "123", Constantes.JURIDICA, Constantes.SALUD);
+			Assert.fail("debe haber lanzado exepcion");
+		} catch (NewRegisterException e) {
+		} catch (ImposibleCrearEmpleadorException e) {
+			Assert.fail(e.getMessage());
+		}
+
+	}
+	@Test
+	public void testRegistroEmpleado() {
+		//analizamos el caso de que ya exista un usuario
+			try {
+				EmpleadoPretenso empleado = (EmpleadoPretenso) agencia.registroEmpleado("user2", "pass2", "nombR2", "ap1", "456", 30);
+				Assert.fail("debe haber lanzado exepcion");
+			} catch (NewRegisterException e) {
+			} catch (ImposibleCrearEmpleadoException e) {
+				Assert.fail(e.getMessage());
+			}
+	}
+	@Test
+	public void testRegistroEmpleador2() {
+		//analizamos el caso de que el usuario que se quiera crear tenga mal las credenciales
+		try {
+			agencia.registroEmpleador(null, "pass1", "nombR1", "123", Constantes.JURIDICA, Constantes.SALUD);
+			Assert.fail("debe haber lanzado exepcion porque user es null");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+		try {
+			agencia.registroEmpleador("usej", null, "nombR1", "123", Constantes.JURIDICA, Constantes.SALUD);
+			Assert.fail("debe haber lanzado exepcion porque password es null");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+		try {
+			agencia.registroEmpleador("usej", "pass1", null, "123", Constantes.JURIDICA, Constantes.SALUD);
+			Assert.fail("debe haber lanzado exepcion porque nombre real es null");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+		try {
+			agencia.registroEmpleador("usej", "pass1", "nombR1", null, Constantes.JURIDICA, Constantes.SALUD);
+			Assert.fail("debe haber lanzado exepcion porque telefono es null");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+		try {
+			agencia.registroEmpleador("usej", "pass1", "nombR1", "123", "MATERIAL", Constantes.SALUD);
+			Assert.fail("debe haber lanzado exepcion porque tipo no concuerda");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+		try {
+			agencia.registroEmpleador("usej", "pass1", "nombR1", "123", Constantes.JURIDICA, "OTRO");
+			Assert.fail("debe haber lanzado exepcion porque rubro no concuerda");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+	}
+	@Test
+	public void testRegistroEmpleado2() {
+		try {
+			agencia.registroEmpleado(null, "pass", "nombreR", "ap", "12343", 30);
+			Assert.fail("deberia dar exepcion usuario nulo");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadoException e) {
+		}
+		try {
+			agencia.registroEmpleado("usej", null, "nombreR", "ap", "12343", 30);
+			Assert.fail("deberia dar exepcion password nulo");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadoException e) {
+		}
+		try {
+			agencia.registroEmpleado("usej", "pass", null, "ap", "12343", 30);
+			Assert.fail("deberia dar exepcion nombre real nulo");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadoException e) {
+		}
+		try {
+			agencia.registroEmpleado("usej", "pass", "nombreR", null, "12343", 30);
+			Assert.fail("deberia dar exepcion apellido nulo");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadoException e) {
+		}
+		try {
+			agencia.registroEmpleado("usej", "pass", "nombreR", "ap", null, 30);
+			Assert.fail("deberia dar exepcion telefono nulo");
+		} catch (NewRegisterException e) {
+			Assert.fail(e.getMessage());
+		} catch (ImposibleCrearEmpleadoException e) {
+		}
+	}
+
 
 }

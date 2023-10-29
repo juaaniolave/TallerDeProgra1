@@ -57,23 +57,22 @@ public class testAgenciaPersistencia {
 		agencia.crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleadoPretenso);
 		agencia.crearTicketEmpleador(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleador);
 		
-		
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		
+		HashMap<String,Empleador> vacio1=new HashMap<String,Empleador>();
+		HashMap<String,EmpleadoPretenso> vacio2=new HashMap<String,EmpleadoPretenso>();
+		HashMap<Cliente,Double> vacio3=new HashMap<Cliente,Double>();
+		ArrayList<Contratacion> vacio4=new ArrayList<Contratacion>();
+		agencia.setEmpleados(vacio2);
+		agencia.setEmpleadores(vacio1);
+		agencia.setContrataciones(vacio4);
+		agencia.setComisionesUsuarios(vacio3);
 	}
 
+	
 	@Test
-	public void testLimitesRemuneracion() {
-		Assert.assertEquals("el limite superior deberia existir", this.limiteSuperior,3000);
-	}
-	@Test
-	public void testMatch() {
-		agencia.match(empleador,empleadoPretenso);
-	}
-	/*@Test
 	public void testGuardar() {
 		try {
 			agencia.guardarAgencia("archivoagencia");
@@ -85,9 +84,6 @@ public class testAgenciaPersistencia {
 		} catch (IOException e) {
 			Assert.fail(e.getMessage());
 		}
-	}*/
-
-	
-
+	}
 
 }

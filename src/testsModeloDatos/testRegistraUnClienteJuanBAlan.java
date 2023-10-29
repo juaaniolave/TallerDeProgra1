@@ -17,7 +17,6 @@ class testRegistraUnClienteJuanBAlan {
 	
 	String nombre,password,user,tel,apellido;
 	int edad;
-	EmpleadoPretenso ep1;
 	Agencia a1;
 	private String rubro;
 	private String tipoPersona;

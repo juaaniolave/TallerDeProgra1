@@ -2,6 +2,8 @@ package TestAgencia;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -293,6 +295,20 @@ class testAgenciaAlgunosMetodos {
 		} catch (ImposibleCrearEmpleadoException e) {
 		}
 	}
+	@Test
+	public void testGuardar() {
+		try {
+			agencia.guardarAgencia("archivoagencia");
+			File archivo=new File("archivoagencia");
+			//en ningun lado dice que sea xml la persistencia pero lo es en teoria
+			//asique otra cosa mas para el informe
+			// y por ende no se podria testear cargarAgencia
+			Assert.assertTrue("deberia existir el archivo",archivo.exists());
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
 
 
 }

@@ -63,7 +63,6 @@ class testAgenciaAlgunosMetodos {
 		this.agencia.crearTicketEmpleador(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleador);
 		this.agencia.crearTicketEmpleado(Constantes.HOME_OFFICE, 2000, Constantes.JORNADA_MEDIA, Constantes.MANAGMENT, Constantes.EXP_NADA, Constantes.SECUNDARIOS,empleadoPretenso2);
 		this.agencia.crearTicketEmpleador(Constantes.INDISTINTO, 4000, Constantes.JORNADA_EXTENDIDA, Constantes.SENIOR, Constantes.EXP_MUCHA, Constantes.PRIMARIOS,empleador2);
-		
 		this.limiteInferior = 1000;
 		this.limiteSuperior = 3000;
 		this.agencia.setLimitesRemuneracion(limiteInferior, limiteSuperior);
@@ -102,6 +101,10 @@ class testAgenciaAlgunosMetodos {
 	public void testMatch() {
 		
 		agencia.match(empleador,empleadoPretenso);
+		GregorianCalendar calendar = new GregorianCalendar();
+		Contratacion c=new Contratacion(empleador,empleadoPretenso);
+		ArrayList<Contratacion> ac=agencia.getContrataciones();
+		Contratacion c2=ac.get(0);
 		Assert.assertEquals("el ticket deberia ser null",empleador.getTicket(),null);
 		Assert.assertEquals("el ticket deberia ser null",empleadoPretenso.getTicket(),null);
 		Assert.assertEquals("el puntaje debe ser 50",empleador.getPuntaje(),50);
@@ -109,13 +112,7 @@ class testAgenciaAlgunosMetodos {
 		//aca tamb testeamos los metodos de getcontratacionempleado/r (esto es integracion)
 		Assert.assertEquals("deberia devolver el usuario asociado",agencia.getContratacionEmpleadoPretenso(empleadoPretenso),empleador);
 		Assert.assertEquals("deberia devolver el usuario asociado",agencia.getContratacionEmpleador(empleador),empleadoPretenso);
-		Contratacion c=new Contratacion(empleador,empleadoPretenso);
-		ArrayList<Contratacion> ac=agencia.getContrataciones();
-		Contratacion c2=ac.get(0);
-		//ya que las contratafciones no se puede igualar, las desgloso para ver si son la misma
-		//GregorianCalendar calendar = new GregorianCalendar();
-		//Assert.assertEquals("deberian ser los mismos datos de contratacion (FECHA)",calendar,c2.getFecha());
-		//NO TESTEO LA FECHA PORQUE SON IGUALES Y NO DA QUE LO SEAN
+		Assert.assertEquals("deberian ser los mismos datos de contratacion (FECHA)",calendar,c2.getFecha());
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADO)",c.getEmpleado(),c2.getEmpleado());
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADOR)",c.getEmpleador(),c2.getEmpleador());
 		
@@ -136,7 +133,6 @@ class testAgenciaAlgunosMetodos {
 	}
 	@Test
 	public void testSetLimitesRemuneracion2() {
-		//en este escenario no se chequean las exepciones solo que cargue bien el numero
 		try {
 			agencia.setLimitesRemuneracion(1000, 500);
 			Assert.fail("debe haber tirado una excepcion");
@@ -147,7 +143,6 @@ class testAgenciaAlgunosMetodos {
 	}
 	@Test
 	public void testSetLimitesRemuneracion3() {
-		//en este escenario no se chequean las exepciones solo que cargue bien el numero
 		try {
 			agencia.setLimitesRemuneracion(-1000, 500);
 			Assert.fail("debe haber tirado una excepcion");
@@ -308,7 +303,23 @@ class testAgenciaAlgunosMetodos {
 			Assert.fail(e.getMessage());
 		}
 	}
-
+	@Test
+	public void testAplicaPromo() {
+		ClientePuntaje c1=new ClientePuntaje(10,empleadoPretenso);
+		ClientePuntaje c2=new ClientePuntaje(20,empleadoPretenso2);
+		ArrayList<ClientePuntaje> l=new ArrayList<ClientePuntaje>();
+		l.add(c1);l.add(c2);
+		empleador.setListaDePostulantes(l);
+		ClientePuntaje c3=new ClientePuntaje(10,empleador);
+		ClientePuntaje c4=new ClientePuntaje(15,empleador2);
+		ArrayList<ClientePuntaje> l2=new ArrayList<ClientePuntaje>();
+		l2.add(c3);l2.add(c4);
+		empleadoPretenso.setListaDePostulantes(l2);
+		
+		Cliente cliente=agencia.aplicaPromo(true);
+		System.out.println("aca"+cliente);
+		
+	}
 
 
 }

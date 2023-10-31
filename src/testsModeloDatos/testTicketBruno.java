@@ -73,7 +73,7 @@ class testTicketBruno {
 	}
 	@Test
 	void testGetComparacionLocacion() {
-		Assert.assertEquals(-1,t1.getComparacionLocacion(t2),0.0);
+		Assert.assertEquals(-1.0,t1.getComparacionLocacion(t2),0.0);
 	}
 	@Test
 	void testGetComparacionPuesto() {
@@ -84,9 +84,14 @@ class testTicketBruno {
 		Assert.assertEquals(1.0,t1.getComparacionRemuneracion(t2),0.0);
 	}
 	@Test
-	void tesSetRemuneracion() {
+	void testSetRemuneracion() {
 		t1.setRemuneracion(1500);
 		Assert.assertEquals("no cambio bien la remuneracion",t1.getRemuneracion(),1500);
 	}
+	@Test
+	void testGetComparacionTotal() {
+		Assert.assertEquals("no compara bien el total",-1.0,t1.getComparacionTotal(t2),0.0);
+	}
+	
 
 }

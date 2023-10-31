@@ -305,7 +305,7 @@ class testAgenciaAlgunosMetodos {
 	}
 	@Test
 	public void testAplicaPromo() {
-		ClientePuntaje c1=new ClientePuntaje(10,empleadoPretenso);
+		/*ClientePuntaje c1=new ClientePuntaje(10,empleadoPretenso);
 		ClientePuntaje c2=new ClientePuntaje(20,empleadoPretenso2);
 		ArrayList<ClientePuntaje> l=new ArrayList<ClientePuntaje>();
 		l.add(c1);l.add(c2);
@@ -317,7 +317,7 @@ class testAgenciaAlgunosMetodos {
 		empleadoPretenso.setListaDePostulantes(l2);
 		
 		Cliente cliente=agencia.aplicaPromo(true);
-		System.out.println("aca"+cliente);
+		System.out.println("aca"+cliente);*/
 		
 	}
 

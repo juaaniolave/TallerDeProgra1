@@ -30,6 +30,7 @@ import modeloDatos.Contratacion;
 import modeloDatos.EmpleadoPretenso;
 import modeloDatos.Empleador;
 import modeloNegocio.Agencia;
+import persistencia.IPersistencia;
 import util.Constantes;
 
 class testAgenciaAlgunosMetodos {
@@ -295,9 +296,6 @@ class testAgenciaAlgunosMetodos {
 		try {
 			agencia.guardarAgencia("archivoagencia");
 			File archivo=new File("archivoagencia");
-			//en ningun lado dice que sea xml la persistencia pero lo es en teoria
-			//asique otra cosa mas para el informe
-			// y por ende no se podria testear cargarAgencia
 			Assert.assertTrue("deberia existir el archivo",archivo.exists());
 		} catch (IOException e) {
 			Assert.fail(e.getMessage());
@@ -305,20 +303,7 @@ class testAgenciaAlgunosMetodos {
 	}
 	@Test
 	public void testAplicaPromo() {
-		/*ClientePuntaje c1=new ClientePuntaje(10,empleadoPretenso);
-		ClientePuntaje c2=new ClientePuntaje(20,empleadoPretenso2);
-		ArrayList<ClientePuntaje> l=new ArrayList<ClientePuntaje>();
-		l.add(c1);l.add(c2);
-		empleador.setListaDePostulantes(l);
-		ClientePuntaje c3=new ClientePuntaje(10,empleador);
-		ClientePuntaje c4=new ClientePuntaje(15,empleador2);
-		ArrayList<ClientePuntaje> l2=new ArrayList<ClientePuntaje>();
-		l2.add(c3);l2.add(c4);
-		empleadoPretenso.setListaDePostulantes(l2);
-		
-		Cliente cliente=agencia.aplicaPromo(true);
-		System.out.println("aca"+cliente);*/
-		
+
 	}
 
 

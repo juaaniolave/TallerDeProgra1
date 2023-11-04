@@ -137,7 +137,7 @@ class testRegistraDosClientesAlanJuanB {
 
 	
 	@AfterEach
-	void tearDown() throws Exception {
+	void tearDown() {
 		
 		HashMap<String, Empleador> empleadores = a1.getInstance().getEmpleadores();
 	    empleadores.clear();

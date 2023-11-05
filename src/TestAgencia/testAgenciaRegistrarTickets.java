@@ -11,9 +11,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import excepciones.ContraException;
 import excepciones.ImposibleCrearEmpleadoException;
 import excepciones.ImposibleModificarTicketsException;
 import excepciones.NewRegisterException;
+import excepciones.NombreUsuarioException;
 import modeloDatos.Cliente;
 import modeloDatos.Contratacion;
 import modeloDatos.EmpleadoPretenso;
@@ -101,7 +103,13 @@ public class testAgenciaRegistrarTickets {
 	@Test
 	public void testTicketCambioEmpleado() {
 		try {
-			this.agencia.crearTicketEmpleado(Constantes.HOME_OFFICE, 2500, Constantes.JORNADA_MEDIA, Constantes.SENIOR, Constantes.EXP_MUCHA, Constantes.SECUNDARIOS,agencia.getEmpleados().get(0));
+			this.agencia.login("user2","pass2");
+		} catch (ContraException | NombreUsuarioException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			this.agencia.crearTicketEmpleado(Constantes.HOME_OFFICE, 2500, Constantes.JORNADA_MEDIA, Constantes.SENIOR, Constantes.EXP_MUCHA, Constantes.SECUNDARIOS,agencia.getEmpleados().get("user2"));
 		} catch (ImposibleModificarTicketsException e) {
 
 		}

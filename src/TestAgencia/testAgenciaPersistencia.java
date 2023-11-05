@@ -30,6 +30,7 @@ public class testAgenciaPersistencia {
 	Agencia agencia=Agencia.getInstance();
 	Empleador empleador;
 	EmpleadoPretenso empleadoPretenso;
+	PersistenciaXML p=new PersistenciaXML();
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -46,6 +47,8 @@ public class testAgenciaPersistencia {
 		this.agencia.crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleadoPretenso);
 		this.agencia.crearTicketEmpleador(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleador);
 		this.agencia.setLimitesRemuneracion(1000, 3000);
+		
+		
 	}
 
 	@AfterEach
@@ -60,29 +63,34 @@ public class testAgenciaPersistencia {
 
 	@Test
 	public void testGuardar() {
-		PersistenciaXML p=new PersistenciaXML();
-		agencia.setPersistencia(p);
+		this.agencia.setPersistencia(this.p);
 		try {
 			agencia.guardarAgencia("archivoagencia.xml");
 			File arch=new File("archivoagencia.xml");
 			Assert.assertTrue("debe existir el archivo", arch.exists());
 		} catch (IOException e) {
-			Assert.fail();
+			Assert.fail(e.getMessage());
 		}
 	}
 	@Test
 	public void testCargar() {
 		try {
 			agencia.cargarAgencia("archivoagencia.xml");
+			Assert.assertEquals("el limite inferior debe ser igual",1000,agencia.getLimiteInferior());
+			Assert.assertEquals("el limite superior debe ser igual",3000,agencia.getLimiteSuperior());
+			Assert.assertEquals("no debe haber nadie logeado",agencia.getTipoUsuario(),-1);
+			Empleador e1=agencia.getEmpleadores().get("user1");
+			Assert.assertEquals("debe ser el mismo empleador",e1,empleador);
+			EmpleadoPretenso e2=agencia.getEmpleados().get("user2");
+			Assert.assertEquals("debe ser el mismo empleado",e2,empleadoPretenso);
+			Assert.assertEquals("debe ser la misma persistencia", agencia.getPersistencia(),this.p);
+			Assert.assertTrue("las comisiones deben estar vacias",agencia.getComisionesUsuarios().isEmpty());
+			Assert.assertTrue("las contrataciones deben estar vacias",agencia.getContrataciones().isEmpty());
 		} catch (ClassNotFoundException e) {
-			Assert.fail();
+			Assert.fail(e.getMessage());
 		} catch (IOException e) {
-			Assert.fail();
+			Assert.fail(e.getMessage());
 		}
-		
-		File arch=new File("archivoagencia.xml");
-		if (arch.exists())
-			arch.delete();
 	}
 
 }

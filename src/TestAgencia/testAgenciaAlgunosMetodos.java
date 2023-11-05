@@ -89,6 +89,7 @@ class testAgenciaAlgunosMetodos {
 		empleador2.setPuntaje(0);
 		empleadoPretenso2.setPuntaje(0);
 		agencia.setLimitesRemuneracion(1000, 3000);
+		agencia.setEstadoContratacion(false);
 	}
 
 	@Test
@@ -103,15 +104,14 @@ class testAgenciaAlgunosMetodos {
 	public void testMatch() {
 		
 		agencia.match(empleador,empleadoPretenso);
-		GregorianCalendar calendar = new GregorianCalendar();
 		Contratacion c=new Contratacion(empleador,empleadoPretenso);
 		ArrayList<Contratacion> ac=agencia.getContrataciones();
+		GregorianCalendar calendar = new GregorianCalendar();
 		Contratacion c2=ac.get(0);
 		Assert.assertEquals("el ticket deberia ser null",empleador.getTicket(),null);
 		Assert.assertEquals("el ticket deberia ser null",empleadoPretenso.getTicket(),null);
 		Assert.assertEquals("el puntaje debe ser 50",empleador.getPuntaje(),50);
 		Assert.assertEquals("el puntaje debe ser 10",empleadoPretenso.getPuntaje(),10);
-		//aca tamb testeamos los metodos de getcontratacionempleado/r (esto es integracion)
 		Assert.assertEquals("deberia devolver el usuario asociado",agencia.getContratacionEmpleadoPretenso(empleadoPretenso),empleador);
 		Assert.assertEquals("deberia devolver el usuario asociado",agencia.getContratacionEmpleador(empleador),empleadoPretenso);
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (FECHA)",calendar,c2.getFecha());
@@ -177,12 +177,22 @@ class testAgenciaAlgunosMetodos {
 	public void testEliminarTicket() throws ContraException, NombreUsuarioException  {
 			agencia.login("user1", "pass1");
 			agencia.setContrataciones(null);
-			//no entiendo no hay contrataciones y no tira exepcion, PREGUNTAR
 			try {
 				agencia.eliminarTicket();
 				Assert.assertEquals("el ticket deberia ser eliminado",null,empleador.getTicket());
 			} catch (ImposibleModificarTicketsException e) {
 				Assert.fail(e.getMessage());
+			}
+	}
+	@Test
+	public void testEliminarTicketExcepcion() throws ContraException, NombreUsuarioException  {
+			agencia.login("user1", "pass1");
+			agencia.setEstadoContratacion(true);
+			try {
+				agencia.eliminarTicket();
+				Assert.fail("debe lanzar excepcion");
+			} catch (ImposibleModificarTicketsException e) {
+				
 			}
 	}
 	@Test
@@ -292,7 +302,24 @@ class testAgenciaAlgunosMetodos {
 		} catch (ImposibleCrearEmpleadoException e) {
 		}
 	}
-
+	@Test
+	public void testGetContratacionEmpleado() {
+		Contratacion c=new Contratacion(empleador,empleadoPretenso);
+		ArrayList<Contratacion> alc=new ArrayList<Contratacion>();
+		alc.add(c);
+		agencia.setContrataciones(alc);
+		Empleador e=(Empleador) agencia.getContratacionEmpleadoPretenso(empleadoPretenso);
+		Assert.assertEquals("deben ser el mismo empleador",e,empleador);
+	}
+	@Test
+	public void testGetContratacionEmpleador() {
+		Contratacion c=new Contratacion(empleador,empleadoPretenso);
+		ArrayList<Contratacion> alc=new ArrayList<Contratacion>();
+		alc.add(c);
+		agencia.setContrataciones(alc);
+		EmpleadoPretenso e=(EmpleadoPretenso)agencia.getContratacionEmpleador(empleador);
+		Assert.assertEquals("deben ser el mismo empleador",e,empleadoPretenso);
+	}
 
 
 }

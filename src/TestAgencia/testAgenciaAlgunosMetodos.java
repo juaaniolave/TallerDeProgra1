@@ -330,7 +330,6 @@ class testAgenciaAlgunosMetodos {
 		} catch (ImposibleCrearEmpleadoException e) {
 		}
 	}
-	
 	@Test
 	public void testGetContratacionEmpleado() {
 		Contratacion c=new Contratacion(empleador,empleadoPretenso);

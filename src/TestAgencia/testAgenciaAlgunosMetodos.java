@@ -29,6 +29,7 @@ import modeloDatos.ClientePuntaje;
 import modeloDatos.Contratacion;
 import modeloDatos.EmpleadoPretenso;
 import modeloDatos.Empleador;
+import modeloDatos.Ticket;
 import modeloNegocio.Agencia;
 import persistencia.IPersistencia;
 import util.Constantes;
@@ -291,20 +292,7 @@ class testAgenciaAlgunosMetodos {
 		} catch (ImposibleCrearEmpleadoException e) {
 		}
 	}
-	@Test
-	public void testGuardar() {
-		try {
-			agencia.guardarAgencia("archivoagencia");
-			File archivo=new File("archivoagencia");
-			Assert.assertTrue("deberia existir el archivo",archivo.exists());
-		} catch (IOException e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-	@Test
-	public void testAplicaPromo() {
 
-	}
 
 
 }

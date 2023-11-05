@@ -131,7 +131,6 @@ class testLoginLogout {
 		a1.getInstance().cerrarSesion();
 		Assert.assertEquals("El tipo deberia ser -1 ya que se cerro sesion",-1,a1.getInstance().getTipoUsuario());
 	}
-	
 	@Test
 	void testCierraSesionEmpleador(){
 		String user="Gero";
@@ -146,6 +145,5 @@ class testLoginLogout {
 		a1.getInstance().cerrarSesion();
 		Assert.assertEquals("El tipo deberia ser -1 ya que se cerro sesion",-1,a1.getInstance().getTipoUsuario());
 	}
-
 
 }

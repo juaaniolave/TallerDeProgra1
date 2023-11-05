@@ -117,7 +117,10 @@ class testAgenciaAlgunosMetodos {
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (FECHA)",calendar,c2.getFecha());
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADO)",c.getEmpleado(),c2.getEmpleado());
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADOR)",c.getEmpleador(),c2.getEmpleador());
-		
+		Ticket t=new Ticket(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS);
+		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleador.calculaComision(t),agencia.getComisionUsuario(empleador));
+		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleadoPretenso.calculaComision(t),agencia.getComisionUsuario(empleadoPretenso));
+
 		
 	}
 	@Test
@@ -302,6 +305,32 @@ class testAgenciaAlgunosMetodos {
 		} catch (ImposibleCrearEmpleadoException e) {
 		}
 	}
+	@Test
+	public void testRegistroEmpleador3() {
+		//este es el caso que se reistra correctamente
+		Empleador emp;
+		try {
+			emp = (Empleador) agencia.registroEmpleador("USEJ", "pass1", "nombR1", "123", Constantes.JURIDICA, Constantes.SALUD);
+			Empleador emp2=agencia.getEmpleadores().get("USEJ");
+			Assert.assertEquals("deben ser el mismo usuario",emp,emp2);
+		} catch (ImposibleCrearEmpleadorException e) {
+		}
+		catch (NewRegisterException e) {
+		} 
+	}
+	@Test
+	public void testRegistroEmpleado3() {
+		//este es el caso que se reistra correctamente
+		EmpleadoPretenso emp;
+		try {
+			emp = (EmpleadoPretenso) agencia.registroEmpleado("USEJ", "pass2", "nombR2", "ap1", "456", 30);
+			EmpleadoPretenso emp2=agencia.getEmpleados().get("USEJ");
+			Assert.assertEquals("deben ser el mismo usuario",emp,emp2);
+		} catch (NewRegisterException e) {
+		} catch (ImposibleCrearEmpleadoException e) {
+		}
+	}
+	
 	@Test
 	public void testGetContratacionEmpleado() {
 		Contratacion c=new Contratacion(empleador,empleadoPretenso);

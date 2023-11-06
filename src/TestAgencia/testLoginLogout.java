@@ -40,6 +40,18 @@ class testLoginLogout {
 		} catch (ImposibleCrearEmpleadoException e1) {
 		}
 		
+		this.user ="";
+		this.password ="";
+		this.nombre="";
+		this.tel="22359";
+		this.apellido ="";
+		this.edad=20;
+		try {
+			a1.getInstance().registroEmpleado(user, password, nombre, apellido, tel, edad);
+		} catch (NewRegisterException e1) {
+		} catch (ImposibleCrearEmpleadoException e1) {
+		}
+		
 		this.user="Gero";
 		this.password="3333";
 		this.nombre="Geronimo";
@@ -64,6 +76,21 @@ class testLoginLogout {
 	void testLoginEmpleado() {
 		String user="Pedrito";
 		String password="1234";
+		try {
+			Usuario usuario=a1.getInstance().login(user, password);
+			Assert.assertEquals("El tipo de usuario logeado no es el esperado",0,a1.getInstance().getTipoUsuario());
+		} catch (ContraException e) {
+			Assert.fail(e.getMessage()+"no debio haber tirado esta excepcion");
+		} catch (NombreUsuarioException e) {
+			Assert.fail(e.getMessage()+"no debio haber tirado esta excepcion");
+		}
+		
+	}
+	
+	@Test
+	void testLoginEmpleadoCadenaVacia() {
+		String user="";
+		String password="";
 		try {
 			Usuario usuario=a1.getInstance().login(user, password);
 			Assert.assertEquals("El tipo de usuario logeado no es el esperado",0,a1.getInstance().getTipoUsuario());

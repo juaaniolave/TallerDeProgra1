@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.6" class="java.beans.XMLDecoder">
+ <object class="persistencia.AgenciaDTO" id="AgenciaDTO0">
+  <void property="empleadores">
+   <void method="put">
+    <string>user1</string>
+    <object class="modeloDatos.Empleador">
+     <void property="password">
+      <string>pass1</string>
+     </void>
+     <void property="realName">
+      <string>123</string>
+     </void>
+     <void property="rubro">
+      <string>JURIDICA</string>
+     </void>
+     <void property="telefono">
+      <string>nombR1</string>
+     </void>
+     <void property="ticket">
+      <object class="modeloDatos.Ticket">
+       <void property="estudios">
+        <string>Terciario</string>
+       </void>
+       <void property="experiencia">
+        <string>ExperienciaMedia</string>
+       </void>
+       <void property="jornada">
+        <string>CargaCompleta</string>
+       </void>
+       <void property="locacion">
+        <string>Presencial</string>
+       </void>
+       <void property="puesto">
+        <string>Junior</string>
+       </void>
+       <void property="remuneracion">
+        <int>1500</int>
+       </void>
+      </object>
+     </void>
+     <void property="tipoPersona">
+      <string>SALUD</string>
+     </void>
+     <void property="usserName">
+      <string>user1</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="empleados">
+   <void method="put">
+    <string>user2</string>
+    <object class="modeloDatos.EmpleadoPretenso">
+     <void property="apellido">
+      <string>456</string>
+     </void>
+     <void property="edad">
+      <int>30</int>
+     </void>
+     <void property="password">
+      <string>pass2</string>
+     </void>
+     <void property="realName">
+      <string>nombR2</string>
+     </void>
+     <void property="telefono">
+      <string>ap1</string>
+     </void>
+     <void property="ticket">
+      <object class="modeloDatos.Ticket">
+       <void property="estudios">
+        <string>Terciario</string>
+       </void>
+       <void property="experiencia">
+        <string>ExperienciaMedia</string>
+       </void>
+       <void property="jornada">
+        <string>CargaCompleta</string>
+       </void>
+       <void property="locacion">
+        <string>Presencial</string>
+       </void>
+       <void property="puesto">
+        <string>Junior</string>
+       </void>
+       <void property="remuneracion">
+        <int>1500</int>
+       </void>
+      </object>
+     </void>
+     <void property="usserName">
+      <string>user2</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="limiteSuperior">
+   <int>3000</int>
+  </void>
+ </object>
+</java>

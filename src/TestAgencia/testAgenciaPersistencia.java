@@ -16,6 +16,11 @@ import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import controlador.Controlador;
+import excepciones.ContraException;
+import excepciones.LimiteInferiorRemuneracionInvalidaException;
+import excepciones.LimiteSuperiorRemuneracionInvalidaException;
+import excepciones.NombreUsuarioException;
 import modeloDatos.Cliente;
 import modeloDatos.Contratacion;
 import modeloDatos.EmpleadoPretenso;
@@ -43,6 +48,7 @@ public class testAgenciaPersistencia {
 	@BeforeEach
 	void setUp() throws Exception {
 		//este es un escenario posible algunos metodos requieren de otros escenarios tambien
+		Agencia.getInstance().setPersistencia(p);
 		this.empleador = (Empleador) agencia.registroEmpleador("user1", "pass1", "nombR1", "123", Constantes.JURIDICA, Constantes.SALUD);
 		this.empleadoPretenso = (EmpleadoPretenso) agencia.registroEmpleado("user2", "pass2", "nombR2", "ap1", "456", 30);
 		this.agencia.crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleadoPretenso);
@@ -62,40 +68,12 @@ public class testAgenciaPersistencia {
 
 	@Test
 	public void testGuardar() {
-		UtilPersistencia u=new UtilPersistencia();
-		AgenciaDTO ad=u.AgenciaDtoFromAgencia();
-		System.out.println(ad.getLimiteInferior());
-		System.out.println(ad.getLimiteSuperior());
-		System.out.println(ad.getEmpleados());
-		System.out.println(ad.getEmpleadores());
-		/*this.agencia.setPersistencia(this.p);
-		try {
-			agencia.guardarAgencia("archivoagencia.xml");
-			File arch=new File("archivoagencia.xml");
-			Assert.assertTrue("debe existir el archivo", arch.exists());
-		} catch (IOException e) {
-			Assert.fail(e.getMessage());
-		}*/
+		
+		
 	}
 	@Test
 	public void testCargar() {
-		/*try {
-			agencia.cargarAgencia("archivoagencia.xml");
-			Assert.assertEquals("el limite inferior debe ser igual",1000,agencia.getLimiteInferior());
-			Assert.assertEquals("el limite superior debe ser igual",3000,agencia.getLimiteSuperior());
-			Assert.assertEquals("no debe haber nadie logeado",agencia.getTipoUsuario(),-1);
-			Empleador e1=agencia.getEmpleadores().get("user1");
-			Assert.assertEquals("debe ser el mismo empleador",e1,empleador);
-			EmpleadoPretenso e2=agencia.getEmpleados().get("user2");
-			Assert.assertEquals("debe ser el mismo empleado",e2,empleadoPretenso);
-			Assert.assertEquals("debe ser la misma persistencia", agencia.getPersistencia(),this.p);
-			Assert.assertTrue("las comisiones deben estar vacias",agencia.getComisionesUsuarios().isEmpty());
-			Assert.assertTrue("las contrataciones deben estar vacias",agencia.getContrataciones().isEmpty());
-		} catch (ClassNotFoundException e) {
-			Assert.fail(e.getMessage());
-		} catch (IOException e) {
-			Assert.fail(e.getMessage());
-		}*/
+		
 	}
 
 }

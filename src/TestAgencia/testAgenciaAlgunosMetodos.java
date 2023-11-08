@@ -119,7 +119,7 @@ class testAgenciaAlgunosMetodos {
 		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADOR)",c.getEmpleador(),c2.getEmpleador());
 		Ticket t=new Ticket(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS);
 		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleador.calculaComision(t),agencia.getComisionUsuario(empleador));
-		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleadoPretenso.calculaComision(t),agencia.getComisionUsuario(empleadoPretenso));
+		Assert.assertEquals("deberian ser la misma remuneracion del empleado",empleadoPretenso.calculaComision(t),agencia.getComisionUsuario(empleadoPretenso));
 
 		
 	}

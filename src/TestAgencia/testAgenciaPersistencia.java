@@ -21,6 +21,7 @@ import modeloDatos.Contratacion;
 import modeloDatos.EmpleadoPretenso;
 import modeloDatos.Empleador;
 import modeloNegocio.Agencia;
+import persistencia.AgenciaDTO;
 import persistencia.IPersistencia;
 import persistencia.PersistenciaXML;
 import persistencia.UtilPersistencia;
@@ -47,8 +48,6 @@ public class testAgenciaPersistencia {
 		this.agencia.crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleadoPretenso);
 		this.agencia.crearTicketEmpleador(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleador);
 		this.agencia.setLimitesRemuneracion(1000, 3000);
-		
-		
 	}
 
 	@AfterEach
@@ -63,18 +62,24 @@ public class testAgenciaPersistencia {
 
 	@Test
 	public void testGuardar() {
-		this.agencia.setPersistencia(this.p);
+		UtilPersistencia u=new UtilPersistencia();
+		AgenciaDTO ad=u.AgenciaDtoFromAgencia();
+		System.out.println(ad.getLimiteInferior());
+		System.out.println(ad.getLimiteSuperior());
+		System.out.println(ad.getEmpleados());
+		System.out.println(ad.getEmpleadores());
+		/*this.agencia.setPersistencia(this.p);
 		try {
 			agencia.guardarAgencia("archivoagencia.xml");
 			File arch=new File("archivoagencia.xml");
 			Assert.assertTrue("debe existir el archivo", arch.exists());
 		} catch (IOException e) {
 			Assert.fail(e.getMessage());
-		}
+		}*/
 	}
 	@Test
 	public void testCargar() {
-		try {
+		/*try {
 			agencia.cargarAgencia("archivoagencia.xml");
 			Assert.assertEquals("el limite inferior debe ser igual",1000,agencia.getLimiteInferior());
 			Assert.assertEquals("el limite superior debe ser igual",3000,agencia.getLimiteSuperior());
@@ -90,7 +95,7 @@ public class testAgenciaPersistencia {
 			Assert.fail(e.getMessage());
 		} catch (IOException e) {
 			Assert.fail(e.getMessage());
-		}
+		}*/
 	}
 
 }

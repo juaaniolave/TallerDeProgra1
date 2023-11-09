@@ -1,21 +1,24 @@
 package testsModeloDatos;
 
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import junit.framework.Assert;
 import modeloDatos.Contratacion;
 import modeloDatos.EmpleadoPretenso;
 import modeloDatos.Empleador;
 
-class testContratacionJuanOlave {
-	
+public class testContratacion {
 	Contratacion contratacion;
 	Empleador empleador;
 	EmpleadoPretenso empleadoPretenso;
@@ -28,29 +31,30 @@ class testContratacionJuanOlave {
 	static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		empleador = new Empleador ();
 		empleadoPretenso = new EmpleadoPretenso();
 		contratacion=new Contratacion(empleador,empleadoPretenso);
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	void testConstructorEmpleador() {
+	public void testConstructorEmpleador() {
 		Assert.assertEquals("empleador no son iguales",this.empleador, this.contratacion.getEmpleador());
 	}
 
 	@Test
-	void testConstructorEmpleadoPretenso() {
+	public void testConstructorEmpleadoPretenso() {
 		Assert.assertEquals("empleadorPretenso no son iguales",this.empleadoPretenso, this.contratacion.getEmpleado());
 	}
 	@Test
-	void testConstructorFecha() {
+	public void testConstructorFecha() {
 		 Calendar calendar = new GregorianCalendar();
 		Assert.assertEquals("empleadorPretenso no son iguales",calendar, this.contratacion.getFecha());
 	}
+
 }

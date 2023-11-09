@@ -1,5 +1,7 @@
 package testsModeloDatos;
 
+import static org.junit.Assert.*;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -11,8 +13,7 @@ import modeloDatos.Empleador;
 import modeloDatos.Ticket;
 import util.Constantes;
 
-public class testEmpleadorJuanOlave {
-	
+public class testEmpleador {
 	Empleador empleador;
 	String username;
 	String password;
@@ -100,5 +101,5 @@ public class testEmpleadorJuanOlave {
 		Assert.assertEquals("Las comisiones no son iguales", comisionEsperada, this.empleador.calculaComision(ticket), 0.0);
 	}
 	
-	
+
 }

@@ -1,10 +1,12 @@
 package TestAgencia;
 
-import java.util.HashMap;
+import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import excepciones.ContraException;
 import excepciones.ImposibleCrearEmpleadoException;
@@ -12,22 +14,19 @@ import excepciones.ImposibleCrearEmpleadorException;
 import excepciones.NewRegisterException;
 import excepciones.NombreUsuarioException;
 import junit.framework.Assert;
-import modeloDatos.Admin;
-import modeloDatos.EmpleadoPretenso;
-import modeloDatos.Empleador;
 import modeloDatos.Usuario;
 import modeloNegocio.Agencia;
 import util.Constantes;
 
-class testLoginLogout {
+public class testLoginLogouta {
 	String nombre,password,user,tel,apellido;
 	int edad;
 	Agencia a1;
 	private String rubro;
 	private String tipoPersona;
 
-	@BeforeEach
-	void setUp()  {
+	@Before
+	public void setUp()  {
 		this.user ="Pedrito";
 		this.password ="1234";
 		this.nombre="Pedro";
@@ -66,14 +65,14 @@ class testLoginLogout {
 		
 	}
 
-	@AfterEach
-	void tearDown()  {
+	@After
+	public void tearDown()  {
 		a1.getInstance().getEmpleadores().clear();
 		a1.getInstance().getEmpleados().clear();
 	}
 
 	@Test
-	void testLoginEmpleado() {
+	public void testLoginEmpleado() {
 		String user="Pedrito";
 		String password="1234";
 		try {
@@ -88,7 +87,7 @@ class testLoginLogout {
 	}
 	
 	@Test
-	void testLoginEmpleadoCadenaVacia() {
+	public void testLoginEmpleadoCadenaVacia() {
 		String user="";
 		String password="";
 		try {
@@ -102,7 +101,7 @@ class testLoginLogout {
 		
 	}
 	@Test
-	void testLoginEmpleador()  {
+	public void testLoginEmpleador()  {
 		String user="Gero";
 		String password="3333";
 		try {
@@ -116,7 +115,7 @@ class testLoginLogout {
 		
 	}
 	@Test
-	void testLoginAdmin()  {
+	public void testLoginAdmin()  {
 		String user="admin";
 		String password="admin";
 		try {
@@ -129,7 +128,7 @@ class testLoginLogout {
 		}
 	}
 	@Test
-	void testExcepciones() {
+	public void testExcepciones() {
 		try {
 			a1.getInstance().login("Gero", "pass");
 		} catch (ContraException e) {
@@ -145,7 +144,7 @@ class testLoginLogout {
 		}
 	}
 	@Test
-	void testCierraSesionEmpleado() {
+	public void testCierraSesionEmpleado() {
 		String user="Pedrito";
 		String password="1234";
 		try {
@@ -159,7 +158,7 @@ class testLoginLogout {
 		Assert.assertEquals("El tipo deberia ser -1 ya que se cerro sesion",-1,a1.getInstance().getTipoUsuario());
 	}
 	@Test
-	void testCierraSesionEmpleador(){
+	public void testCierraSesionEmpleador(){
 		String user="Gero";
 		String password="3333";
 		try {

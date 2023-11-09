@@ -1,20 +1,21 @@
 package testsModeloDatos;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import junit.framework.Assert;
 import modeloDatos.EmpleadoPretenso;
-import modeloDatos.Empleador;
 import modeloDatos.Ticket;
 import util.Constantes;
 
-class testEmpleadorPretensoBruno {
+public class testEmpleadorPretenso {
 	EmpleadoPretenso empleado;
 	String username;
 	String password;
@@ -30,8 +31,8 @@ class testEmpleadorPretensoBruno {
 	static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		this.username = "bruno";//no se puede testear por que no hay get
 		this.password = "asdasd";
 		this.nombreReal = "bruno t";
@@ -42,8 +43,8 @@ class testEmpleadorPretensoBruno {
 		this.empleado = new EmpleadoPretenso(username,password,nombreReal,telefono,apellido,edad);
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 	}
 	
 	@Test
@@ -84,4 +85,5 @@ class testEmpleadorPretensoBruno {
 		Ticket t=new Ticket(Constantes.HOME_OFFICE,1000,Constantes.JORNADA_COMPLETA,Constantes.SENIOR,Constantes.EXP_NADA,Constantes.SECUNDARIOS);
 		Assert.assertEquals("no calcula bien la comision",900.0,this.empleado.calculaComision(t));
 	}
+
 }

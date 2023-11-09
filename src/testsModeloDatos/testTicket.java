@@ -1,19 +1,21 @@
 package testsModeloDatos;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import modeloDatos.Ticket;
 import modeloNegocio.Agencia;
 import util.Constantes;
 
-class testTicketBruno {
+public class testTicket {
 	String locacion1;
 	int remuneracion1;
 	String jornada1;
@@ -36,8 +38,8 @@ class testTicketBruno {
 	static void tearDownAfterClass() throws Exception {
 	}
 
-	@BeforeEach
-	void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		Agencia.getInstance().setLimitesRemuneracion(1000, 5000);
 		this.locacion1=Constantes.PRESENCIAL;
 		this.remuneracion1=1500;
@@ -55,41 +57,41 @@ class testTicketBruno {
 		t2=new Ticket(this.locacion2,this.remuneracion2,this.jornada2,this.puesto2,this.experiencia2,this.estudios2);
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 	}
 
 	@Test
-	void testGetComparacionEstudios() {
+	public void testGetComparacionEstudios() {
 		Assert.assertEquals(-1.5,t1.getComparacionEstudios(t2),0.0);
 	}
 	@Test
-	void testGetComparacionExperiencia() {
+	public void testGetComparacionExperiencia() {
 		Assert.assertEquals(1.5,t1.getComparacionExperiencia(t2),0.0);
 	}
 	@Test
-	void testGetComparacionJornada() {
+	public void testGetComparacionJornada() {
 		Assert.assertEquals(-0.5,t1.getComparacionJornada(t2),0.0);
 	}
 	@Test
-	void testGetComparacionLocacion() {
+	public void testGetComparacionLocacion() {
 		Assert.assertEquals(-1.0,t1.getComparacionLocacion(t2),0.0);
 	}
 	@Test
-	void testGetComparacionPuesto() {
+	public void testGetComparacionPuesto() {
 		Assert.assertEquals(-0.5,t1.getComparacionPuesto(t2),0.0);
 	}
 	@Test
-	void testGetComparacionRemuneracion() {
+	public void testGetComparacionRemuneracion() {
 		Assert.assertEquals(1.0,t1.getComparacionRemuneracion(t2),0.0);
 	}
 	@Test
-	void testSetRemuneracion() {
+	public void testSetRemuneracion() {
 		t1.setRemuneracion(1500);
 		Assert.assertEquals("no cambio bien la remuneracion",t1.getRemuneracion(),1500);
 	}
 	@Test
-	void testGetComparacionTotal() {
+	public void testGetComparacionTotal() {
 		Assert.assertEquals("no compara bien el total",-1.0,t1.getComparacionTotal(t2),0.0);
 	}
 	

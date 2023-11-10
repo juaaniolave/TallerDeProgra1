@@ -332,6 +332,44 @@ public class testAgenciaAlgunosMetodosa {
 		EmpleadoPretenso e=(EmpleadoPretenso)agencia.getContratacionEmpleador(empleador);
 		Assert.assertEquals("deben ser el mismo empleador",e,empleadoPretenso);
 	}
+	
+	@Test
+	public void testCrearTicketEmpleadoPretensoLocacion() {
+		//estan todos en un mismo metodo porque ninguno tiro error
+		Assert.assertEquals("El ticket no tiene la locacion esperada", this.empleadoPretenso.getTicket().getLocacion(),Constantes.PRESENCIAL);
+		Assert.assertEquals("El ticket no tiene la experiencia esperada", this.empleadoPretenso.getTicket().getExperiencia(),Constantes.EXP_MEDIA);
+		Assert.assertEquals("El ticket no tiene la jornada esperada", this.empleadoPretenso.getTicket().getJornada(),Constantes.JORNADA_COMPLETA );
+		Assert.assertEquals("El ticket no tiene le puesto esperado", this.empleadoPretenso.getTicket().getPuesto(),Constantes.JUNIOR );
+		Assert.assertEquals("El ticket no tiene la remuneracion esperada", this.empleadoPretenso.getTicket().getRemuneracion(),1500);
+		Assert.assertEquals("El ticket no tiene los estudios esperados", this.empleadoPretenso.getTicket().getEstudios(),Constantes.TERCIARIOS);
+		try {
+			this.agencia.crearTicketEmpleado(Constantes.HOME_OFFICE, 2000, Constantes.JORNADA_MEDIA, Constantes.MANAGMENT, Constantes.EXP_NADA, Constantes.SECUNDARIOS,this.empleadoPretenso);
+		} catch (ImposibleModificarTicketsException e) {
+			Assert.fail("No debio tirar la excepcion");
+		}
+		Assert.assertEquals("El ticket no tiene la locacion esperada", this.empleadoPretenso.getTicket().getLocacion(),Constantes.PRESENCIAL);
+		Assert.assertEquals("El ticket no tiene la experiencia esperada", this.empleadoPretenso.getTicket().getExperiencia(),Constantes.EXP_MEDIA);
+		Assert.assertEquals("El ticket no tiene la jornada esperada", this.empleadoPretenso.getTicket().getJornada(),Constantes.JORNADA_COMPLETA );
+		Assert.assertEquals("El ticket no tiene le puesto esperado", this.empleadoPretenso.getTicket().getPuesto(),Constantes.JUNIOR );
+		Assert.assertEquals("El ticket no tiene la remuneracion esperada", this.empleadoPretenso.getTicket().getRemuneracion(),1500);
+		Assert.assertEquals("El ticket no tiene los estudios esperados", this.empleadoPretenso.getTicket().getEstudios(),Constantes.TERCIARIOS);
+		
+	}
+	@Test
+	public void testCrearTicketEmpleadorLocacion() {	
+		//estan todos en un mismo metodo porque ninguno tiro error
+		Assert.assertEquals("El ticket no tiene la locacion esperada", this.empleador.getTicket().getLocacion(),Constantes.PRESENCIAL);
+		Assert.assertEquals("El ticket no tiene la experiencia esperada", this.empleador.getTicket().getExperiencia(),Constantes.EXP_MEDIA);
+		Assert.assertEquals("El ticket no tiene la jornada esperada", this.empleador.getTicket().getJornada(),Constantes.JORNADA_COMPLETA );
+		Assert.assertEquals("El ticket no tiene le puesto esperado", this.empleador.getTicket().getPuesto(),Constantes.JUNIOR );
+		Assert.assertEquals("El ticket no tiene la remuneracion esperada", this.empleador.getTicket().getRemuneracion(),1500);
+		Assert.assertEquals("El ticket no tiene los estudios esperados", this.empleador.getTicket().getEstudios(),Constantes.TERCIARIOS);
+		try {
+			this.agencia.crearTicketEmpleador(Constantes.INDISTINTO, 4000, Constantes.JORNADA_EXTENDIDA, Constantes.SENIOR, Constantes.EXP_MUCHA, Constantes.PRIMARIOS,this.empleador);
+		} catch (ImposibleModificarTicketsException e) {
+			Assert.fail("No debio tirar la excepcion");
+		}
+	}
 
 
 }

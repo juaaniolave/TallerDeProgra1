@@ -26,18 +26,15 @@ public class testLoginLogouta {
 	private String tipoPersona;
 
 	@Before
-	public void setUp()  {
+	public void setUp() throws Exception  {
 		this.user ="Pedrito";
 		this.password ="1234";
 		this.nombre="Pedro";
 		this.tel="22359";
 		this.apellido ="Basualdo";
 		this.edad=20;
-		try {
-			a1.getInstance().registroEmpleado(user, password, nombre, apellido, tel, edad);
-		} catch (NewRegisterException e1) {
-		} catch (ImposibleCrearEmpleadoException e1) {
-		}
+		a1.getInstance().registroEmpleado(user, password, nombre, apellido, tel, edad);
+	
 		
 		this.user ="";
 		this.password ="";
@@ -45,24 +42,14 @@ public class testLoginLogouta {
 		this.tel="22359";
 		this.apellido ="";
 		this.edad=20;
-		try {
-			a1.getInstance().registroEmpleado(user, password, nombre, apellido, tel, edad);
-		} catch (NewRegisterException e1) {
-		} catch (ImposibleCrearEmpleadoException e1) {
-		}
-		
+		a1.getInstance().registroEmpleado(user, password, nombre, apellido, tel, edad);
 		this.user="Gero";
 		this.password="3333";
 		this.nombre="Geronimo";
 		this.tel="7777";
 		this.rubro=Constantes.COMERCIO_LOCAL;
 		this.tipoPersona=Constantes.FISICA;
-		try {
-			a1.getInstance().registroEmpleador(user, password, nombre, tel, tipoPersona, rubro);
-		} catch (NewRegisterException e) {
-		} catch (ImposibleCrearEmpleadorException e) {
-		}
-		
+		a1.getInstance().registroEmpleador(user, password, nombre, tel, tipoPersona, rubro);
 	}
 
 	@After

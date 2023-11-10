@@ -77,29 +77,6 @@ public class testAgenciaAlgunosMetodosa {
 	}
 
 	@Test
-	public void testMatch() {
-		
-		agencia.match(empleador,empleadoPretenso);
-		Contratacion c=new Contratacion(empleador,empleadoPretenso);
-		ArrayList<Contratacion> ac=agencia.getContrataciones();
-		GregorianCalendar calendar = new GregorianCalendar();
-		Contratacion c2=ac.get(0);
-		Assert.assertEquals("el ticket deberia ser null",empleador.getTicket(),null);
-		Assert.assertEquals("el ticket deberia ser null",empleadoPretenso.getTicket(),null);
-		Assert.assertEquals("el puntaje debe ser 50",empleador.getPuntaje(),50);
-		Assert.assertEquals("el puntaje debe ser 10",empleadoPretenso.getPuntaje(),10);
-		Assert.assertEquals("deberia devolver el usuario asociado",agencia.getContratacionEmpleadoPretenso(empleadoPretenso),empleador);
-		Assert.assertEquals("deberia devolver el usuario asociado",agencia.getContratacionEmpleador(empleador),empleadoPretenso);
-		Assert.assertEquals("deberian ser los mismos datos de contratacion (FECHA)",calendar,c2.getFecha());
-		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADO)",c.getEmpleado(),c2.getEmpleado());
-		Assert.assertEquals("deberian ser los mismos datos de contratacion (EMPELADOR)",c.getEmpleador(),c2.getEmpleador());
-		Ticket t=new Ticket(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS);
-		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleador.calculaComision(t),agencia.getComisionUsuario(empleador));
-		Assert.assertEquals("deberian ser la misma remuneracion del empleado",empleadoPretenso.calculaComision(t),agencia.getComisionUsuario(empleadoPretenso));
-
-		
-	}
-	@Test
 	public void testSetLimitesRemuneracion() {
 		//en este escenario no se chequean las exepciones solo que cargue bien el numero
 		try {

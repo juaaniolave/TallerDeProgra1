@@ -67,7 +67,6 @@ public class testRegistrarUsuario {
 				Assert.fail("no es la exepcion que se espera");
 			}
 	}
-	/*
 	@Test
 	public void testRegistroEmpleadorInvalidUser() {
 		//analizamos el caso de que el usuario que se quiera crear tenga mal las credenciales
@@ -213,5 +212,4 @@ public class testRegistrarUsuario {
 			Assert.fail(e.getMessage());
 		}
 	}
-	*/
 }

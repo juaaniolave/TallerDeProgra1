@@ -14,7 +14,7 @@ import modeloNegocio.Agencia;
 import util.Constantes;
 
 
-public class testTicket {
+public class TestTicket {
 	String locacion1;
 	int remuneracion1;
 	String jornada1;
@@ -95,3 +95,4 @@ public class testTicket {
 	}
 
 }
+

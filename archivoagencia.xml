@@ -17,28 +17,6 @@
      <void property="telefono">
       <string>nombR1</string>
      </void>
-     <void property="ticket">
-      <object class="modeloDatos.Ticket">
-       <void property="estudios">
-        <string>Terciario</string>
-       </void>
-       <void property="experiencia">
-        <string>ExperienciaMedia</string>
-       </void>
-       <void property="jornada">
-        <string>CargaCompleta</string>
-       </void>
-       <void property="locacion">
-        <string>Presencial</string>
-       </void>
-       <void property="puesto">
-        <string>Junior</string>
-       </void>
-       <void property="remuneracion">
-        <int>1500</int>
-       </void>
-      </object>
-     </void>
      <void property="tipoPersona">
       <string>SALUD</string>
      </void>
@@ -66,28 +44,6 @@
      </void>
      <void property="telefono">
       <string>ap1</string>
-     </void>
-     <void property="ticket">
-      <object class="modeloDatos.Ticket">
-       <void property="estudios">
-        <string>Terciario</string>
-       </void>
-       <void property="experiencia">
-        <string>ExperienciaMedia</string>
-       </void>
-       <void property="jornada">
-        <string>CargaCompleta</string>
-       </void>
-       <void property="locacion">
-        <string>Presencial</string>
-       </void>
-       <void property="puesto">
-        <string>Junior</string>
-       </void>
-       <void property="remuneracion">
-        <int>1500</int>
-       </void>
-      </object>
      </void>
      <void property="usserName">
       <string>user2</string>

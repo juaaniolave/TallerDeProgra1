@@ -26,7 +26,7 @@ public class TestMatch {
 	Empleador empleador;
 	EmpleadoPretenso empleadoPretenso;
 	Contratacion c;
-	Ticket t;
+	MockTicket t;
 	GregorianCalendar calendar;
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -46,7 +46,7 @@ public class TestMatch {
 		agencia.match(empleador,empleadoPretenso);
 		calendar = new GregorianCalendar();
 		c=new Contratacion(empleador,empleadoPretenso);
-		t=new Ticket(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS);
+		t=new MockTicket(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS);
 	}
 
 	@After
@@ -105,11 +105,11 @@ public class TestMatch {
 	}
 	@Test
 	public void testMatchComisionEmpleador() {
-		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleador.calculaComision(t),agencia.getComisionUsuario(empleador));
+		Assert.assertEquals("deberian ser la misma remuneracion del empleador",empleador.calculaComision(t),agencia.getComisionUsuario(empleador),0.0);
 	}
 	@Test
 	public void testMatchComisionEmpleado() {
-		Assert.assertEquals("deberian ser la misma remuneracion del empleado",empleadoPretenso.calculaComision(t),agencia.getComisionUsuario(empleadoPretenso));
+		Assert.assertEquals("deberian ser la misma remuneracion del empleado",empleadoPretenso.calculaComision(t),agencia.getComisionUsuario(empleadoPretenso),0.0);
 	}
 
 }

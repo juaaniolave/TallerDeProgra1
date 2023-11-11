@@ -13,4 +13,9 @@ public class MiOptionPane implements InterfazOptionPanel {
 	    public void ShowMessage(Component parent, String mensaje) {
 	        JOptionPane.showMessageDialog(parent, mensaje);
 	    }
+
+		@Override
+		public void ShowMessage(String arg0) {
+			// TODO Auto-generated method stub	
+		}
 }

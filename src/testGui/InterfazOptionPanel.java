@@ -2,6 +2,8 @@ package testGui;
 
 import java.awt.Component;
 
-public interface InterfazOptionPanel {
+import vista.IOptionPane;
+
+public interface InterfazOptionPanel extends IOptionPane {
 	void ShowMessage(Component parent, String mensaje);
 }

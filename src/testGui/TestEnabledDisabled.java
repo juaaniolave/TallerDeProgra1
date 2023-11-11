@@ -1,12 +1,11 @@
 package testGui;
 
-import static org.junit.Assert.*;
-
 import java.awt.AWTException;
 import java.awt.Component;
 import java.awt.Robot;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -521,4 +520,5 @@ public class TestEnabledDisabled {
 	        Assert.assertFalse("El boton de aceptar deberia estar deshablitado", confirmarNuevoTicket.isEnabled());
 	        Assert.assertTrue("El boton de nuevoTicket deberia estar deshabilitado", nuevoTicket.isEnabled());    
 	    }
+	    
 }

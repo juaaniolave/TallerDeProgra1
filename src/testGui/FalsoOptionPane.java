@@ -19,6 +19,5 @@ public class FalsoOptionPane implements IOptionPane{
 	@Override
 	public void ShowMessage(String arg0) {
 		this.mensaje=arg0;
-		
 	}
 }

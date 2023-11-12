@@ -283,6 +283,122 @@ public class TestEnabledDisabled {
 
 	    }
 	    @Test
+	    public void testRegEnabledBotonRegistrarEmpleado()
+	    {
+	 		robot.delay(TestUtils.getDelay());
+	 	    //obtengo las referencias a los componentes necesarios                     
+	 	    JButton registrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REGISTRAR);
+	 	    TestUtils.clickComponent(registrar,robot);
+	 	    JTextField user= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_USSER_NAME);
+	 	    JTextField password= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_PASSWORD);
+	 	    JTextField repetirPassword= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_CONFIRM_PASSWORD);
+	 	    JTextField nombreReal= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_REAL_NAME);
+	 	    JTextField tel= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_TELEFONO);
+	 	    JTextField apellido= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_APELLIDO);
+	 	    JTextField edad= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_EDAD);
+	 	    JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
+	        JRadioButton salud= (JRadioButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_RADIO_SALUD);
+	        JButton cancelarRegistro = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_CANCELAR);
+
+	 	    //lleno los JTextField
+	 	    TestUtils.clickComponent(user, robot);
+	 	    TestUtils.tipeaTexto("Barcelona", robot);
+	 	    TestUtils.clickComponent(password, robot);
+	 	    TestUtils.tipeaTexto("12345", robot);
+	 	    TestUtils.clickComponent(repetirPassword, robot);
+	 	    TestUtils.tipeaTexto("12345", robot);
+	 	    TestUtils.clickComponent(nombreReal, robot);
+	 	    TestUtils.tipeaTexto("Pepe", robot);
+	 	    TestUtils.clickComponent(tel, robot);
+	 	    TestUtils.tipeaTexto("22341414", robot);
+	 	    TestUtils.clickComponent(apellido, robot);
+	 	    TestUtils.tipeaTexto("Guardiola", robot);
+	 	    TestUtils.clickComponent(edad, robot);
+	 	    TestUtils.tipeaTexto("21", robot);
+	 	    //lleno los JTextField
+	        TestUtils.clickComponent(user, robot);
+	        TestUtils.tipeaTexto("Pepe", robot);
+	        //verifico los resultados
+	        Assert.assertTrue("El boton de registro deberia estar hablitado",aceptarRegistrar.isEnabled());
+	        Assert.assertTrue("El boton de cancelar deberia estar habilitado",cancelarRegistro.isEnabled());
+	        Assert.assertFalse("El boton de salud deberia estar deshabilitado",salud.isEnabled());
+	    }
+	    @Test
+	    public void testRegEnabledBotonRegistrarEmpleador()
+	    {
+	    	robot.delay(TestUtils.getDelay());
+	        //obtengo las referencias a los componentes necesarios                     
+	        JButton registrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REGISTRAR);
+	        TestUtils.clickComponent(registrar,robot);
+	        JTextField user= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_USSER_NAME);
+	        JTextField password= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_PASSWORD);
+	        JTextField repetirPassword= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_CONFIRM_PASSWORD);
+	        JTextField nombreReal= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_REAL_NAME);
+	        JTextField tel= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_TELEFONO);
+	        JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
+	        JRadioButton empleador= (JRadioButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.EMPLEADOR);
+	        JRadioButton salud= (JRadioButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_RADIO_SALUD);
+	        JButton cancelarRegistro = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_CANCELAR);
+	        //lleno los JTextField
+	        TestUtils.clickComponent(user, robot);
+	        TestUtils.tipeaTexto("Alan", robot);
+	        TestUtils.clickComponent(password, robot);
+	        TestUtils.tipeaTexto("12345", robot);
+	        TestUtils.clickComponent(repetirPassword, robot);
+	        TestUtils.tipeaTexto("41451323223323", robot);
+	        TestUtils.clickComponent(nombreReal, robot);
+	        TestUtils.tipeaTexto("Pepe", robot);
+	        TestUtils.clickComponent(tel, robot);
+	        TestUtils.tipeaTexto("22341414", robot);
+	        TestUtils.clickComponent(empleador, robot);
+	        TestUtils.clickComponent(aceptarRegistrar, robot);
+	        //verifico los resultados
+	        Assert.assertTrue("El boton de registro deberia estar hablitado",aceptarRegistrar.isEnabled());
+	        Assert.assertTrue("El boton de cancelar deberia estar habilitado",cancelarRegistro.isEnabled());
+	        Assert.assertTrue("El boton de salud deberia estar habilitado",salud.isEnabled());
+	    }
+	    @Test
+	    public void testRegEdadNeg()
+	    {
+	 		robot.delay(TestUtils.getDelay());
+	 	    //obtengo las referencias a los componentes necesarios                     
+	 	    JButton registrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REGISTRAR);
+	 	    TestUtils.clickComponent(registrar,robot);
+	 	    JTextField user= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_USSER_NAME);
+	 	    JTextField password= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_PASSWORD);
+	 	    JTextField repetirPassword= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_CONFIRM_PASSWORD);
+	 	    JTextField nombreReal= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_REAL_NAME);
+	 	    JTextField tel= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_TELEFONO);
+	 	    JTextField apellido= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_APELLIDO);
+	 	    JTextField edad= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_EDAD);
+	 	    JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
+	        JRadioButton salud= (JRadioButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_RADIO_SALUD);
+	        JButton cancelarRegistro = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_CANCELAR);
+
+	 	    //lleno los JTextField
+	 	    TestUtils.clickComponent(user, robot);
+	 	    TestUtils.tipeaTexto("Barcelona", robot);
+	 	    TestUtils.clickComponent(password, robot);
+	 	    TestUtils.tipeaTexto("12345", robot);
+	 	    TestUtils.clickComponent(repetirPassword, robot);
+	 	    TestUtils.tipeaTexto("12345", robot);
+	 	    TestUtils.clickComponent(nombreReal, robot);
+	 	    TestUtils.tipeaTexto("Pepe", robot);
+	 	    TestUtils.clickComponent(tel, robot);
+	 	    TestUtils.tipeaTexto("22341414", robot);
+	 	    TestUtils.clickComponent(apellido, robot);
+	 	    TestUtils.tipeaTexto("Guardiola", robot);
+	 	    TestUtils.clickComponent(edad, robot);
+	 	    TestUtils.tipeaTexto("-24", robot);
+	 	    //lleno los JTextField
+	        TestUtils.clickComponent(user, robot);
+	        TestUtils.tipeaTexto("Pepe", robot);
+	        //verifico los resultados
+	        Assert.assertFalse("El boton de registro deberia estar deshablitado",aceptarRegistrar.isEnabled());
+	        Assert.assertTrue("El boton de cancelar deberia estar habilitado",cancelarRegistro.isEnabled());
+	        Assert.assertFalse("El boton de salud deberia estar deshabilitado",salud.isEnabled());
+	    }
+	    @Test
 	    public void testAdminVacio()
 	    {
 	        robot.delay(TestUtils.getDelay());
@@ -418,7 +534,7 @@ public class TestEnabledDisabled {
 	        Assert.assertFalse("El boton de registro deberia estar deshablitado", confirmarNuevoTicket.isEnabled());
 	    }
 	    @Test
-	    public void testClienteAreaTicketVisibleYNuevoTicketInvisible()
+	    public void testClienteAreaNuevoTicketVisibleYNuevoTicketInvisible()
 	    {
 	        robot.delay(TestUtils.getDelay());
 	        //obtengo las referencias a los componentes necesarios                     
@@ -441,7 +557,7 @@ public class TestEnabledDisabled {
 	        Assert.assertFalse("El boton de nuevoTicket deberia estar deshablitado", nuevoTicket.isEnabled());  
 	    }
 	    @Test
-	    public void testClienteAreaTicketVisibleYAceptarInvisible()
+	    public void testClienteNumNegNuevoTicketInVisibleYAceptarInvisible()
 	    {
 	        robot.delay(TestUtils.getDelay());
 	        //obtengo las referencias a los componentes necesarios                     
@@ -461,7 +577,7 @@ public class TestEnabledDisabled {
 	        TestUtils.clickComponent(nuevoTicket, robot);
 	        JTextField remuneracion= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXTFIELD_REMUNERACION);
 	        TestUtils.clickComponent(remuneracion, robot);
-	        TestUtils.tipeaTexto("0", robot);
+	        TestUtils.tipeaTexto("-2", robot);
 	        Assert.assertTrue("El boton de jornada media deberia estar hablitado", jornadaMedia.isEnabled());
 	        Assert.assertFalse("El boton de aceptar deberia estar deshablitado", confirmarNuevoTicket.isEnabled());
 	        Assert.assertFalse("El boton de nuevoTicket deberia estar deshabilitado", nuevoTicket.isEnabled());    
@@ -493,7 +609,7 @@ public class TestEnabledDisabled {
 	        Assert.assertFalse("El boton de nuevoTicket deberia estar deshabilitado", nuevoTicket.isEnabled());    
 	    }
 	    @Test
-	    public void testClienteAceptar()
+	    public void testClienteConfirmaNuevoTicket()
 	    {
 	        robot.delay(TestUtils.getDelay());
 	        //obtengo las referencias a los componentes necesarios                     
@@ -518,7 +634,7 @@ public class TestEnabledDisabled {
 
 	        Assert.assertFalse("El boton de jornada media deberia estar deshablitado", jornadaMedia.isEnabled());
 	        Assert.assertFalse("El boton de aceptar deberia estar deshablitado", confirmarNuevoTicket.isEnabled());
-	        Assert.assertTrue("El boton de nuevoTicket deberia estar deshabilitado", nuevoTicket.isEnabled());    
+	        Assert.assertTrue("El boton de nuevoTicket deberia estar habilitado", nuevoTicket.isEnabled());    
 	    }
 	    
 }

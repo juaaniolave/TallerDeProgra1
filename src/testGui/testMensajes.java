@@ -29,6 +29,7 @@ public class testMensajes {
 	Robot robot;
 	Controlador controlador;
 	FalsoOptionPane op=new FalsoOptionPane();
+	String userEmpleadoPretenso,userEmpleador,passEmpleadoPretenso,passEmpleador;
 	public testMensajes()
     {
         try
@@ -43,8 +44,12 @@ public class testMensajes {
 	public void setUp() throws Exception {
 		controlador = new Controlador();
 		controlador.setMyOptionPane(op);
-		Agencia.getInstance().registroEmpleador("Alan","Boca123", "Leonel", "2235912241", Constantes.JURIDICA, Constantes.SALUD);
-		EmpleadoPretenso empleado=(EmpleadoPretenso) Agencia.getInstance().registroEmpleado("Pepe342", "1234", "pepe", "Joselito","2235912241" , 21);
+		this.userEmpleador="Alan";
+		this.passEmpleador="Boca123";
+		Agencia.getInstance().registroEmpleador(this.userEmpleador,this.passEmpleador, "Leonel", "2235912241", Constantes.JURIDICA, Constantes.SALUD);
+		this.userEmpleadoPretenso="Pepe342";
+		this.passEmpleadoPretenso="1234";
+		EmpleadoPretenso empleado=(EmpleadoPretenso) Agencia.getInstance().registroEmpleado(this.userEmpleadoPretenso,this.passEmpleadoPretenso, "pepe", "Joselito","2235912241" , 21);
 		Agencia.getInstance().crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleado);
 	}
 
@@ -65,7 +70,7 @@ public class testMensajes {
 	        JButton aceptarLog = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.LOGIN);
 	        //lleno los JTextField
 	        TestUtils.clickComponent(user, robot);
-	        TestUtils.tipeaTexto("Pepe342", robot);
+	        TestUtils.tipeaTexto(this.userEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(password, robot);
 	        TestUtils.tipeaTexto("111", robot);
 	        TestUtils.clickComponent(aceptarLog, robot);
@@ -84,7 +89,7 @@ public class testMensajes {
 	        TestUtils.clickComponent(user, robot);
 	        TestUtils.tipeaTexto("Rogel", robot);
 	        TestUtils.clickComponent(password, robot);
-	        TestUtils.tipeaTexto("1234", robot);
+	        TestUtils.tipeaTexto(this.passEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(aceptarLog, robot);
 
 	        //verifico los resultados
@@ -107,7 +112,7 @@ public class testMensajes {
 	        JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
 	        //lleno los JTextField
 	        TestUtils.clickComponent(user, robot);
-	        TestUtils.tipeaTexto("Pepe342", robot);
+	        TestUtils.tipeaTexto(this.userEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(password, robot);
 	        TestUtils.tipeaTexto("12345", robot);
 	        TestUtils.clickComponent(repetirPassword, robot);
@@ -127,7 +132,7 @@ public class testMensajes {
 	 @Test
 	    public void testRegEmpleadoConfirmacionContraInvalida()
 	    {
-		 robot.delay(TestUtils.getDelay());
+		 	robot.delay(TestUtils.getDelay());
 	        //obtengo las referencias a los componentes necesarios                     
 	        JButton registrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REGISTRAR);
 	        TestUtils.clickComponent(registrar,robot);
@@ -208,7 +213,7 @@ public class testMensajes {
 	        JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
 	        //lleno los JTextField
 	        TestUtils.clickComponent(user, robot);
-	        TestUtils.tipeaTexto("Alan", robot);
+	        TestUtils.tipeaTexto(this.userEmpleador, robot);
 	        TestUtils.clickComponent(password, robot);
 	        TestUtils.tipeaTexto("12345", robot);
 	        TestUtils.clickComponent(repetirPassword, robot);
@@ -239,7 +244,7 @@ public class testMensajes {
 	        JRadioButton empleador= (JRadioButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.EMPLEADOR);
 	        //lleno los JTextField
 	        TestUtils.clickComponent(user, robot);
-	        TestUtils.tipeaTexto("Alan", robot);
+	        TestUtils.tipeaTexto("roquee2e2", robot);
 	        TestUtils.clickComponent(password, robot);
 	        TestUtils.tipeaTexto("12345", robot);
 	        TestUtils.clickComponent(repetirPassword, robot);
@@ -264,9 +269,9 @@ public class testMensajes {
 	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
 	        //lleno los JTextField
 	        TestUtils.clickComponent(user, robot);
-	        TestUtils.tipeaTexto("Pepe342", robot);
+	        TestUtils.tipeaTexto(this.userEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(password, robot);
-	        TestUtils.tipeaTexto("1234", robot);
+	        TestUtils.tipeaTexto(this.passEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(aceptarLog, robot);
 	        TestUtils.clickComponent(areaTicket, robot);
 	        TestUtils.clickComponent(eliminarTicket, robot); 

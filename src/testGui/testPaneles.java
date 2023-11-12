@@ -17,6 +17,7 @@ import junit.framework.Assert;
 import modeloNegocio.Agencia;
 import util.Constantes;
 import vista.IVista;
+import vista.Ventana;
 
 public class testPaneles {
 	Robot robot;
@@ -45,6 +46,10 @@ public class testPaneles {
 
 	@After
 	public void tearDown() throws Exception {
+		Ventana ventana=(Ventana) controlador.getVista();
+		ventana.setVisible(false);	
+		Agencia.getInstance().getEmpleadores().clear();
+		agencia.cerrarSesion();
 	}
 
 	@Test

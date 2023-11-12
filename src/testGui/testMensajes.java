@@ -247,7 +247,7 @@ public class testMensajes {
 	        TestUtils.clickComponent(eliminarTicket, robot); 
 	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
 	        TestUtils.clickComponent(areaTicket, robot);   
-	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+Mensajes.SIN_TICKET.getValor(),Mensajes.SIN_TICKET.getValor(),op.getMensaje());
+	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+Mensajes.SIN_TICKET.getValor(),Mensajes.SIN_TICKET.getValor(),areaTicket.getText());
 	 	}
 	 	@Test
 	 	public void testMuestraTicket() {
@@ -264,7 +264,7 @@ public class testMensajes {
 	        TestUtils.clickComponent(aceptarLog, robot);
 	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
 	        TestUtils.clickComponent(areaTicket, robot);   
-	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+empleado.getTicket().toString(),empleado.getTicket().toString(),op.getMensaje());
+	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+empleado.getTicket().toString(),empleado.getTicket().toString(),areaTicket.getText());
 	 	}
 	 	
 	 

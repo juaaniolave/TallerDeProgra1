@@ -19,6 +19,7 @@ import junit.framework.Assert;
 import modeloDatos.Empleador;
 import modeloNegocio.Agencia;
 import util.Constantes;
+import vista.Ventana;
 
 public class TestLlamadoAmetodos {
 	Robot robot;
@@ -45,6 +46,11 @@ public class TestLlamadoAmetodos {
 
 	@After
 	public void tearDown() throws Exception {
+		Ventana ventana=(Ventana) controlador.getVista();
+		ventana.setVisible(false);	
+		agencia.getEmpleadores().clear();
+		agencia.getEmpleados().clear();
+		agencia.cerrarSesion();
 	}
 	@Test
 	public void testLoginExitoso(){

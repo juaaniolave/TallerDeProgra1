@@ -21,6 +21,7 @@ import junit.framework.Assert;
 import modeloDatos.Empleador;
 import modeloNegocio.Agencia;
 import util.Constantes;
+import vista.Ventana;
 
 public class TestEnabledDisabled {
 	 Robot robot;
@@ -60,6 +61,12 @@ public class TestEnabledDisabled {
 
 	@After
 	public void tearDown() throws Exception {
+		Ventana ventana=(Ventana) controlador.getVista();
+		ventana.setVisible(false);	
+		agencia.getEmpleadores().clear();
+		agencia.getEmpleados().clear();
+		agencia.setEstadoContratacion(false);
+		agencia.cerrarSesion();
 	}
 
 	 @Test
@@ -170,8 +177,8 @@ public class TestEnabledDisabled {
 	        TestUtils.tipeaTexto("h21", robot);
 	        TestUtils.borraJTextField(user, robot);
 	        //verifico los resultados
-	        Assert.assertTrue("El boton de registro deberia estar hablitado", aceptarReg.isEnabled());
-	        Assert.assertFalse("El boton de login deberia estar deshablitado", aceptarLog.isEnabled());
+	        Assert.assertTrue("El boton de registro deberia estar habilitado", aceptarReg.isEnabled());
+	        Assert.assertFalse("El boton de login deberia estar deshabilitado", aceptarLog.isEnabled());
 	    }
 	    @Test
 	    public void testLogCompletoYquitoContraConUser()

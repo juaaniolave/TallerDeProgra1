@@ -21,17 +21,14 @@ import modeloNegocio.Agencia;
 import util.Constantes;
 
 public class TestGeneraPostulantes {
-	Agencia agencia = Agencia.getInstance();
-	Empleador empleador;
-	EmpleadoPretenso empleadoPretenso;
-	Empleador empleador2;
-	EmpleadoPretenso empleadoPretenso2;
-	Contratacion contratacion;
-	HashMap<Cliente, Double> comisionesCliente;
-	ClientePuntaje c;
-	ClientePuntaje c2;
-	ClientePuntaje c3;
-	ClientePuntaje c4;
+	Agencia a = Agencia.getInstance();
+	Empleador e1;
+	Empleador e2;
+	Empleador e3;
+	EmpleadoPretenso ep1;
+	EmpleadoPretenso ep2;
+	EmpleadoPretenso ep3;
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -42,77 +39,66 @@ public class TestGeneraPostulantes {
 
 	@Before
 	public void setUp() throws Exception {
-		this.empleador = (Empleador) agencia.registroEmpleador("user1", "pass1", "nombR1", "123", Constantes.JURIDICA, Constantes.SALUD);
-		this.empleadoPretenso = (EmpleadoPretenso) agencia.registroEmpleado("user2", "pass2", "nombR2", "ap1", "456", 30);
-		this.empleador2 = (Empleador) agencia.registroEmpleador("user3", "pass3", "nombR3", "789", Constantes.FISICA, Constantes.COMERCIO_LOCAL);
-		this.empleadoPretenso2 = (EmpleadoPretenso) agencia.registroEmpleado("user4", "pass4", "nombR4", "ap2", "000", 35);
-		this.agencia.crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleadoPretenso);
-		this.agencia.crearTicketEmpleador(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleador);
-		this.agencia.crearTicketEmpleado(Constantes.HOME_OFFICE, 2000, Constantes.JORNADA_MEDIA, Constantes.MANAGMENT, Constantes.EXP_NADA, Constantes.SECUNDARIOS,empleadoPretenso2);
-		this.agencia.crearTicketEmpleador(Constantes.INDISTINTO, 4000, Constantes.JORNADA_EXTENDIDA, Constantes.SENIOR, Constantes.EXP_MUCHA, Constantes.PRIMARIOS,empleador2);
-		this.agencia.setLimitesRemuneracion(1000, 3000);
-		c=new ClientePuntaje(6.0,empleadoPretenso);
-		c2=new ClientePuntaje(-3.5,empleadoPretenso2);
-		c3=new ClientePuntaje(6.0,empleador);
-		c4=new ClientePuntaje(1.0,empleador2);
+		e1=(Empleador) a.registroEmpleador("user1","pass1","nombR1","123",Constantes.JURIDICA,Constantes.SALUD);
+		e2=(Empleador) a.registroEmpleador("user2","pass2","nombR2","123",Constantes.FISICA,Constantes.COMERCIO_LOCAL);
+		e3=(Empleador) a.registroEmpleador("user3","pass3","nombR3","123",Constantes.JURIDICA,Constantes.COMERCIO_INTERNACIONAL);
 		
-		agencia.generaPostulantes();
+		ep1=(EmpleadoPretenso) a.registroEmpleado("user4","pass4","nombR4","123","ap1",20);
+		ep2=(EmpleadoPretenso) a.registroEmpleado("user5","pass5","nombR5","123","ap2",30);
+		ep3=(EmpleadoPretenso) a.registroEmpleado("user6","pass6","nombR6","123","ap3",40);
+		
+		e1.setTicket(new MockTicket(Constantes.HOME_OFFICE, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.SECUNDARIOS));
+		e2.setTicket(new MockTicket(Constantes.HOME_OFFICE, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS));
+		e3.setTicket(new MockTicket(Constantes.HOME_OFFICE, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MUCHA, Constantes.TERCIARIOS));
+		
+		ep1.setTicket(new MockTicket(Constantes.HOME_OFFICE, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.SECUNDARIOS));
+		ep2.setTicket(new MockTicket(Constantes.HOME_OFFICE, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS));
+		ep3.setTicket(new MockTicket(Constantes.HOME_OFFICE, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MUCHA, Constantes.TERCIARIOS));
+
+		a.generaPostulantes();
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		HashMap<String,Empleador> vacio1=new HashMap<String,Empleador>();
-		HashMap<String,EmpleadoPretenso> vacio2=new HashMap<String,EmpleadoPretenso>();
-		HashMap<Cliente,Double> vacio3=new HashMap<Cliente,Double>();
-		ArrayList<Contratacion> vacio4=new ArrayList<Contratacion>();
-		agencia.setEmpleados(vacio2);
-		agencia.setEmpleadores(vacio1);
-		agencia.setContrataciones(vacio4);
-		agencia.setComisionesUsuarios(vacio3);
-		empleador.setListaDePostulantes(null);
-		empleadoPretenso.setListaDePostulantes(null);
-		empleador2.setListaDePostulantes(null);
-		empleadoPretenso2.setListaDePostulantes(null);
-		empleador.setPuntaje(0);
-		empleadoPretenso.setPuntaje(0);
-		empleador2.setPuntaje(0);
-		empleadoPretenso2.setPuntaje(0);
-		agencia.setLimitesRemuneracion(1000, 3000);
-		agencia.setEstadoContratacion(false);
-	}
-
-	@Test
-	public void testLista0EmpleadorPuntaje() {
-		Assert.assertEquals("el puntaje debe ser el mismo 1",empleador.getListaDePostulantes().get(0).getPuntaje(),c.getPuntaje(),0.0);
-	}
-	@Test
-	public void testLista0EmpleadorCliente() {
-		Assert.assertEquals("el cliente debe ser el mismo 1",empleador.getListaDePostulantes().get(0).getCliente(),c.getCliente());
-	}
-	@Test
-	public void testLista1EmpleadorPuntaje() {
-		Assert.assertEquals("el puntaje debe ser el mismo 2",empleador.getListaDePostulantes().get(1).getPuntaje(),c2.getPuntaje(),0.0);
-	}
-	@Test
-	public void testLista1EmpleadorCliente() {
-		Assert.assertEquals("el cliente debe ser el mismo 2",empleador.getListaDePostulantes().get(1).getCliente(),c2.getCliente());
+		a.setEmpleadores(new HashMap<String,Empleador>());
+		a.setEmpleados(new HashMap<String,EmpleadoPretenso>());
+		e1.setListaDePostulantes(null);
+		ep1.setListaDePostulantes(null);
 	}
 	
 	@Test
-	public void testLista0EmpleadoPuntaje() {
-		Assert.assertEquals("el puntaje debe ser el mismo 3",empleadoPretenso.getListaDePostulantes().get(0).getPuntaje(),c3.getPuntaje(),0.0);
+	public void testMayorEmpleadorPuntaje() {
+		Assert.assertEquals("deberian ser el mismo puntaje",7.0,a.getEmpleadores().get("user1").getListaDePostulantes().get(0).getPuntaje(),0.0);
 	}
 	@Test
-	public void testLista0EmpleadoCliente() {
-		Assert.assertEquals("el cliente debe ser el mismo 3",empleadoPretenso.getListaDePostulantes().get(0).getCliente(),c3.getCliente());
+	public void testMenorEmpleadorPuntaje() {
+		Assert.assertEquals("deberian ser el mismo puntaje",6.0,a.getEmpleadores().get("user1").getListaDePostulantes().get(2).getPuntaje(),0.0);
 	}
 	@Test
-	public void testLista1EmpleadoPuntaje() {
-		Assert.assertEquals("el puntaje debe ser el mismo 4",empleadoPretenso.getListaDePostulantes().get(1).getPuntaje(),c4.getPuntaje(),0.0);
+	public void testMayorEmpleadoPuntaje() {
+		Assert.assertEquals("deberian ser el mismo puntaje",6.0,a.getEmpleados().get("user4").getListaDePostulantes().get(0).getPuntaje(),0.0);
 	}
 	@Test
-	public void testLista1EmpleadoCliente() {
-		Assert.assertEquals("el cliente debe ser el mismo 4",empleadoPretenso.getListaDePostulantes().get(1).getCliente(),c4.getCliente());
+	public void testMenorEmpleadoPuntaje() {
+		Assert.assertEquals("deberian ser el mismo puntaje",1.0,a.getEmpleados().get("user4").getListaDePostulantes().get(2).getPuntaje(),0.0);
 	}
+	
+	@Test
+	public void testMayorEmpleadorUser() {
+		Assert.assertEquals("deberian ser el mismo usuario","user6",a.getEmpleadores().get("user1").getListaDePostulantes().get(0).getCliente().getUsserName());
+	}
+	@Test
+	public void testMenorEmpleadorUser() {
+		Assert.assertEquals("deberian ser el mismo usuario","user4",a.getEmpleadores().get("user1").getListaDePostulantes().get(2).getCliente().getUsserName());
+	}
+	@Test
+	public void testMayorEmpleadoUser() {
+		Assert.assertEquals("deberian ser el mismo usuario","user1",a.getEmpleados().get("user4").getListaDePostulantes().get(0).getCliente().getUsserName());
+	}
+	@Test
+	public void testMenorEmpleadoUser() {
+		Assert.assertEquals("deberian ser el mismo usuario","user3",a.getEmpleados().get("user4").getListaDePostulantes().get(2).getCliente().getUsserName());
+	}
+
 	
 }

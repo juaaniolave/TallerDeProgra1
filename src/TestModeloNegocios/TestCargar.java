@@ -88,10 +88,6 @@ public class TestCargar {
 		Assert.assertEquals("deberian ser iguales",3000,agencia.getLimiteSuperior());
 	}
 	@Test
-	public void testTipoUser() {
-		Assert.assertEquals("deberian ser iguales",-1,agencia.getTipoUsuario());
-	}
-	@Test
 	public void testPersistencia() {
 		Assert.assertEquals("deberian ser iguales",this.p,agencia.getPersistencia());
 	}

@@ -30,6 +30,7 @@ public class testMensajes {
 	Controlador controlador;
 	FalsoOptionPane op=new FalsoOptionPane();
 	String userEmpleadoPretenso,userEmpleador,passEmpleadoPretenso,passEmpleador;
+	EmpleadoPretenso empleado;
 	public testMensajes()
     {
         try
@@ -49,8 +50,9 @@ public class testMensajes {
 		Agencia.getInstance().registroEmpleador(this.userEmpleador,this.passEmpleador, "Leonel", "2235912241", Constantes.JURIDICA, Constantes.SALUD);
 		this.userEmpleadoPretenso="Pepe342";
 		this.passEmpleadoPretenso="1234";
-		EmpleadoPretenso empleado=(EmpleadoPretenso) Agencia.getInstance().registroEmpleado(this.userEmpleadoPretenso,this.passEmpleadoPretenso, "pepe", "Joselito","2235912241" , 21);
+		empleado=(EmpleadoPretenso) Agencia.getInstance().registroEmpleado(this.userEmpleadoPretenso,this.passEmpleadoPretenso, "pepe", "Joselito","2235912241" , 21);
 		Agencia.getInstance().crearTicketEmpleado(Constantes.PRESENCIAL, 1500, Constantes.JORNADA_COMPLETA, Constantes.JUNIOR, Constantes.EXP_MEDIA, Constantes.TERCIARIOS,empleado);
+		Agencia.getInstance().setEstadoContratacion(false);
 	}
 
 	@After
@@ -294,7 +296,7 @@ public class testMensajes {
 	        TestUtils.clickComponent(aceptarLog, robot);
 	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
 	        TestUtils.clickComponent(areaTicket, robot);   
-	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+Mensajes.SIN_TICKET.getValor(),Mensajes.SIN_TICKET.getValor(),op.getMensaje());
+	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+empleado.getTicket().toString(),empleado.getTicket().toString(),op.getMensaje());
 	 	}
 	 	
 	 /*

@@ -61,6 +61,8 @@ public class TestLlamadoAmetodos {
 	        TestUtils.clickComponent(aceptarLog, robot);
 	        
 	        Assert.assertTrue("El cliente no se logueo de manera exitosa",agencia.getEmpleadores().containsKey(this.user));
+	        Assert.assertEquals("El cliente no se logueo de manera exitosa",agencia.getTipoUsuario(),1);
+
 	    }
 	@Test
     public void testRegistroExitoso()
@@ -96,5 +98,40 @@ public class TestLlamadoAmetodos {
  	    
         Assert.assertTrue("El cliente no se logueo de manera exitosa deberia existir en el sistema",agencia.getEmpleados().containsKey("Barcelona"));
     }
-	
+	@Test
+    public void testcerrarSesionExitoso()
+    {
+ 		robot.delay(TestUtils.getDelay());
+ 	    //obtengo las referencias a los componentes necesarios                     
+ 	    JButton registrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REGISTRAR);
+ 	    TestUtils.clickComponent(registrar,robot);
+ 	    JTextField user= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_USSER_NAME);
+ 	    JTextField password= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_PASSWORD);
+ 	    JTextField repetirPassword= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_CONFIRM_PASSWORD);
+ 	    JTextField nombreReal= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_REAL_NAME);
+ 	    JTextField tel= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_TELEFONO);
+ 	    JTextField apellido= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_APELLIDO);
+ 	    JTextField edad= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_EDAD);
+ 	    JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
+ 	  
+ 	    TestUtils.clickComponent(user, robot);
+ 	    TestUtils.tipeaTexto("Barcelona", robot);
+ 	    TestUtils.clickComponent(password, robot);
+ 	    TestUtils.tipeaTexto("12345", robot);
+ 	    TestUtils.clickComponent(repetirPassword, robot);
+ 	    TestUtils.tipeaTexto("12345", robot);
+ 	    TestUtils.clickComponent(nombreReal, robot);
+ 	    TestUtils.tipeaTexto("Pepe", robot);
+ 	    TestUtils.clickComponent(tel, robot);
+ 	    TestUtils.tipeaTexto("22341414", robot);
+ 	    TestUtils.clickComponent(apellido, robot);
+ 	    TestUtils.tipeaTexto("Guardiola", robot);
+ 	    TestUtils.clickComponent(edad, robot);
+ 	    TestUtils.tipeaTexto("21", robot);
+ 	    TestUtils.clickComponent(aceptarRegistrar, robot);
+ 	    JButton cerrarSesion = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.CERRARSESION);
+ 	    TestUtils.clickComponent(cerrarSesion, robot);
+
+        Assert.assertEquals("El cliente deberia haberse deslogueado con exito",agencia.getTipoUsuario(),-1);
+    }
 }

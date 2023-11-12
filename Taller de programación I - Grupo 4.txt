@@ -1,0 +1,10 @@
+Grupo: 4
+
+Integrantes:
+Bruno Trinitario
+Alan Juares
+Juan Ignacio Basualdo
+Juan Ignacio Olave
+
+url de repositorio de GitHub:
+https://github.com/juaaniolave/TallerDeProgra1

@@ -59,6 +59,8 @@ public class testMensajes {
 		ventana.setVisible(false);	
 		Agencia.getInstance().getEmpleadores().clear();
 		Agencia.getInstance().getEmpleados().clear();
+		Agencia.getInstance().setEstadoContratacion(false);
+		Agencia.getInstance().cerrarSesion();
 	}
 
 	@Test
@@ -242,7 +244,7 @@ public class testMensajes {
 	        JTextField tel= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_TELEFONO);
 	        JButton aceptarRegistrar = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.REG_BUTTON_REGISTRAR);
 	        JRadioButton empleador= (JRadioButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.EMPLEADOR);
-	        //lleno los JTextField
+	   
 	        TestUtils.clickComponent(user, robot);
 	        TestUtils.tipeaTexto("roquee2e2", robot);
 	        TestUtils.clickComponent(password, robot);
@@ -259,26 +261,42 @@ public class testMensajes {
 	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+Mensajes.PASS_NO_COINCIDE.getValor(),Mensajes.PASS_NO_COINCIDE.getValor(),op.getMensaje());
 	    }
 	 	@Test
-	 	public void testNoMuestraMensajeSinTicket() {
+	 	public void testMuestraMensajeNoTicket() {
 	 		robot.delay(TestUtils.getDelay());
 	        //obtengo las referencias a los componentes necesarios                     
 	        JTextField password= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.PASSWORD);
 	        JTextField user= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.NOMBRE_USUARIO);
 	        JButton aceptarLog = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.LOGIN);
-	        JButton eliminarTicket= (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.ELIMINAR_TICKET);
-	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
 	        //lleno los JTextField
 	        TestUtils.clickComponent(user, robot);
 	        TestUtils.tipeaTexto(this.userEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(password, robot);
 	        TestUtils.tipeaTexto(this.passEmpleadoPretenso, robot);
 	        TestUtils.clickComponent(aceptarLog, robot);
-	        TestUtils.clickComponent(areaTicket, robot);
+	        JButton eliminarTicket= (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.ELIMINAR_TICKET);
 	        TestUtils.clickComponent(eliminarTicket, robot); 
+	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
+	        TestUtils.clickComponent(areaTicket, robot);   
 	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+Mensajes.SIN_TICKET.getValor(),Mensajes.SIN_TICKET.getValor(),op.getMensaje());
-
 	 	}
-	 
+	 	@Test
+	 	public void testMuestraTicket() {
+	 		robot.delay(TestUtils.getDelay());
+	        //obtengo las referencias a los componentes necesarios                     
+	        JTextField password= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.PASSWORD);
+	        JTextField user= (JTextField) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.NOMBRE_USUARIO);
+	        JButton aceptarLog = (JButton) TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.LOGIN);
+	        //lleno los JTextField
+	        TestUtils.clickComponent(user, robot);
+	        TestUtils.tipeaTexto(this.userEmpleadoPretenso, robot);
+	        TestUtils.clickComponent(password, robot);
+	        TestUtils.tipeaTexto(this.passEmpleadoPretenso, robot);
+	        TestUtils.clickComponent(aceptarLog, robot);
+	        JTextArea areaTicket=(JTextArea)TestUtils.getComponentForName((Component) controlador.getVista(),Constantes.TEXT_AREA_TICKET);
+	        TestUtils.clickComponent(areaTicket, robot);   
+	        Assert.assertEquals("Mensaje incorrecto, deberia decir "+Mensajes.SIN_TICKET.getValor(),Mensajes.SIN_TICKET.getValor(),op.getMensaje());
+	 	}
+	 	
 	 /*
 	 @Test
 	    public void testRegEmpleadorCasillaVacia()
